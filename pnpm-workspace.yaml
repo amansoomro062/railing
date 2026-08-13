@@ -40,7 +40,7 @@ catalogs:
   subjects:
     "@base-ui/react": 1.6.0
     radix-ui: 1.6.7
-    antd: 6.5.3
+    antd: 6.6.0
     "@chakra-ui/react": 3.36.1
     "@headlessui/react": 2.2.10
     "@emotion/react": 11.14.0
