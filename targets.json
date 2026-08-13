@@ -14,7 +14,7 @@
       "role": "control",
       "status": "published",
       "notes": "Calibration control. Widely regarded as the accessibility gold standard, and measured first so that a failure it produces is presumed to be a fault in our assertion. Scores 100% on all five components.",
-      "notifiedOn": null
+      "notifiedOn": "2026-08-09"
     },
     {
       "id": "radix",
@@ -65,7 +65,7 @@
       "role": "subject",
       "status": "published",
       "notes": "Measured. Findings withheld until the maintainer has been notified, per docs/DECISIONS.md 004.",
-      "notifiedOn": null,
+      "notifiedOn": "2026-08-09",
       "adapterCorrections": "Your menu scored 19% on its first run. One real defect cascaded into nine unrelated failures because our helper opened the menu with a key your trigger does not support. Corrected before this report.",
       "causes": [
         {
@@ -91,7 +91,7 @@
       "role": "subject",
       "status": "published",
       "notes": "Chakra v3, built on Ark UI. Findings withheld until the maintainer has been notified.",
-      "notifiedOn": null
+      "notifiedOn": "2026-08-09"
     },
     {
       "id": "antd",
@@ -139,7 +139,7 @@
       "role": "subject",
       "status": "published",
       "notes": "Measured. Findings withheld until the maintainer has been notified.",
-      "notifiedOn": null
+      "notifiedOn": "2026-08-09"
     }
   ]
 }
