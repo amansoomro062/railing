@@ -105,7 +105,7 @@
       "role": "subject",
       "status": "published",
       "notes": "Findings verified against the DOM, including with the library's own button component to rule out an adapter fault. Withheld from the site until the maintainer has been notified, per docs/DECISIONS.md 004.",
-      "notifiedOn": null,
+      "notifiedOn": "2026-08-13",
       "adapterCorrections": "Your first run scored 27% on combobox and 42% on accordion. Almost all of that was our adapter, not your library: we required the listbox to be CSS-visible when yours is a zero-height virtual-scroll node a screen reader reaches perfectly well, and we were looking for v5 class names against v6. Both were corrected before this report, and the dialog finding was downgraded from blocker to moderate once we accepted that focus reaching <body> is a wasted stop rather than an escape.",
       "causes": [
         {
