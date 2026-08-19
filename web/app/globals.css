@@ -1433,3 +1433,30 @@ thead th {
     max-height: 380px;
   }
 }
+
+.pg-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.pg-switch a {
+  font-size: 0.85rem;
+  padding: var(--sp-1) var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.pg-switch a:hover {
+  color: var(--ink);
+}
+
+.pg-switch .pg-switch__on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}

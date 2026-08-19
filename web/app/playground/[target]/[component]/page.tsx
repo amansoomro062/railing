@@ -65,6 +65,7 @@ export default async function PlaygroundPage({
   }
 
   const t = site.targets.find((x) => x.id === target);
+  const siblings = allowed.filter((p) => p.target === target);
   const run = site.results.get(target)?.get(component);
   const pattern = PATTERNS[component];
   const versions = run
@@ -92,11 +93,23 @@ export default async function PlaygroundPage({
     <>
       <div className="pagehead">
         <p className="eyebrow eyebrow--ink">
-          <Link href="/playground/">Playground</Link>
+          <Link href="/playground/">&larr; Playground</Link>
         </p>
         <h1>
           {t?.name ?? target} · {pattern?.title ?? component}
         </h1>
+        <nav className="pg-switch" aria-label={`${t?.name ?? target} components`}>
+          {siblings.map((p) => (
+            <Link
+              key={p.component}
+              href={`/playground/${p.target}/${p.component}/`}
+              aria-current={p.component === component ? "page" : undefined}
+              className={p.component === component ? "pg-switch__on" : undefined}
+            >
+              {PATTERNS[p.component]?.title ?? p.component}
+            </Link>
+          ))}
+        </nav>
         <p className="lede">
           The exact mount the score was measured on{versions ? ` (${versions})` : ""}. Walk it with
           your keyboard and watch the readout. The scored result for this component is{" "}
