@@ -1225,6 +1225,30 @@ thead th {
   margin-bottom: var(--sp-1);
 }
 
+.pg-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.pg-section__report {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 650;
+  color: var(--ink-2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pg-section__report:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
 .pg-sectionnote {
   color: var(--ink-2);
   font-size: 0.92rem;
@@ -1383,6 +1407,30 @@ thead th {
   height: 340px;
   border: 0;
   background: #fff;
+}
+
+/* The library report: one pane per component, checks as rows. */
+.pg-report {
+  display: grid;
+  gap: var(--sp-5);
+  margin-top: var(--sp-5);
+}
+
+.pg-report__check {
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.pg-report__check:hover {
+  text-decoration: underline;
+}
+
+.pg-report__id {
+  display: block;
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  margin-top: 2px;
 }
 
 /* The pane is already the frame; the table wrapper inside it goes flush. */

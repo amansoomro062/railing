@@ -63,7 +63,9 @@ export default async function Results() {
               const byComponent = results.get(t.id);
               return (
                 <tr key={t.id}>
-                  <th scope="row">{t.name}</th>
+                  <th scope="row">
+                    <Link href={`/results/${t.id}/`}>{t.name}</Link>
+                  </th>
                   {COMPONENT_ORDER.map((c) => {
                     const run = byComponent?.get(c);
                     if (!run) {

@@ -52,7 +52,12 @@ export default async function Playground() {
           const t = site.targets.find((x) => x.id === target);
           return (
             <section key={target} className="pg-section">
-              <h2>{t?.name ?? target}</h2>
+              <div className="pg-section__head">
+                <h2>{t?.name ?? target}</h2>
+                <Link className="pg-section__report" href={`/results/${target}/`}>
+                  full report &rarr;
+                </Link>
+              </div>
               <div className="cards cards--pg">
                 {components.map((c, i) => {
                   const spec = specs[c as keyof typeof specs];
