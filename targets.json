@@ -49,7 +49,7 @@
       "unverified": {
         "combobox": "Base UI treats the combobox input as a search field: selecting an option commits to the component's value (confirmed: it becomes \"Banana\") but never writes it into the input. That may be a legitimate variant of the pattern rather than a defect, and this spec is written for the APG editable combobox where the input carries the value. Not published until the pattern match is settled."
       },
-      "notifiedOn": null
+      "notifiedOn": "2026-08-19"
     },
     {
       "id": "mui",
