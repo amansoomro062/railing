@@ -96,26 +96,28 @@ export default async function PlaygroundPage({
 
   return (
     <>
-      <div className="pagehead">
+      <div className="pagehead pagehead--pg">
         <Link className="pg-back" href="/playground/">
           &larr; Playground
         </Link>
-        <h1>
-          {t?.name ?? target} · {pattern?.title ?? component}
-        </h1>
-        <nav className="pg-switch" aria-label={`${t?.name ?? target} components`}>
-          {siblings.map((p) => (
-            <Link
-              key={p.component}
-              href={`/playground/${p.target}/${p.component}/`}
-              aria-current={p.component === component ? "page" : undefined}
-              className={p.component === component ? "pg-switch__on" : undefined}
-            >
-              {PATTERNS[p.component]?.title ?? p.component}
-            </Link>
-          ))}
-        </nav>
-        <p className="lede">
+        <div className="pg-headrow">
+          <h1>
+            {t?.name ?? target} · {pattern?.title ?? component}
+          </h1>
+          <nav className="pg-switch" aria-label={`${t?.name ?? target} components`}>
+            {siblings.map((p) => (
+              <Link
+                key={p.component}
+                href={`/playground/${p.target}/${p.component}/`}
+                aria-current={p.component === component ? "page" : undefined}
+                className={p.component === component ? "pg-switch__on" : undefined}
+              >
+                {PATTERNS[p.component]?.title ?? p.component}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <p className="pg-lede">
           The exact mount the score was measured on.{" "}
           <Link href={`/results/${target}/${component}/`}>Scored result</Link>.
         </p>

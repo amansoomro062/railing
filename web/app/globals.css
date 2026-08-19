@@ -1351,6 +1351,14 @@ thead th {
   background: #fff;
 }
 
+/* The pane is already the frame; the table wrapper inside it goes flush. */
+.pg-readout {
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  background: none;
+}
+
 .pg-readout table {
   margin: 0;
 }
@@ -1405,6 +1413,35 @@ thead th {
   }
 }
 
+/* The detail page is a workbench, not an editorial page: compact header,
+   title and switcher on one row, so the walkthrough fits the first screen. */
+.pagehead--pg {
+  padding: var(--sp-5) 0 0;
+}
+
+.pagehead--pg h1 {
+  font-size: clamp(26px, 2.6vw, 38px);
+}
+
+.pg-headrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3) var(--sp-5);
+  flex-wrap: wrap;
+}
+
+.pg-headrow .pg-switch {
+  margin-top: 0;
+}
+
+.pg-lede {
+  margin-top: var(--sp-2);
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+
 /* A quiet way back: mono like the site's eyebrows, no underline, no shout. */
 .pg-back {
   display: inline-block;
@@ -1414,7 +1451,7 @@ thead th {
   text-transform: uppercase;
   color: var(--ink-3);
   text-decoration: none;
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-3);
 }
 
 .pg-back:hover {
@@ -1456,7 +1493,7 @@ thead th {
 
 /* Two activities, two tabs: walk the measured mount, or edit a copy of it. */
 .pg-tabs {
-  margin-top: var(--sp-6);
+  margin-top: var(--sp-4);
 }
 
 .pg-tablist {
@@ -1490,7 +1527,7 @@ thead th {
 }
 
 .pg-tabpanel {
-  padding-top: var(--sp-4);
+  padding-top: var(--sp-3);
 }
 
 .pg-tabpanel:focus-visible {
