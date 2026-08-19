@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "target": {
+    "id": "radix",
+    "versions": {
+      "@radix-ui/react-accordion": "1.2.20",
+      "@radix-ui/react-dialog": "1.1.23",
+      "@radix-ui/react-dropdown-menu": "2.1.19",
+      "@radix-ui/react-tabs": "1.1.14"
+    },
+    "adapterVersion": "0.1.0",
+    "notes": "Mounted with default configuration, following the Radix documentation. No focus management, ARIA attributes or key handlers added by the adapter."
+  },
+  "component": "combobox",
+  "specVersion": "1.0.0",
+  "environment": {
+    "browser": "chromium",
+    "browserVersion": "151.0.7922.34",
+    "platform": "darwin",
+    "runnerVersion": "0.1.0"
+  },
+  "startedAt": "2026-08-04T17:50:40.981Z",
+  "finishedAt": "2026-08-04T17:50:41.116Z",
+  "assertions": [
+    {
+      "id": "combobox.has-accessible-name",
+      "title": "The combobox has an accessible name",
+      "rationale": "Without a name, a screen reader announces an unlabelled combobox and the user has no idea what they are choosing.",
+      "status": "not-applicable",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.has-combobox-role",
+      "title": "The input exposes role=combobox",
+      "rationale": "The role is what tells assistive technology that this input has a popup, and enables the announcements and shortcuts that go with it.",
+      "status": "not-applicable",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.is-focusable",
+      "title": "The combobox can be reached with the Tab key",
+      "rationale": "If Tab does not reach it, a keyboard user cannot use the control at all.",
+      "status": "not-applicable",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.collapsed-by-default",
+      "title": "aria-expanded is present and false before the popup opens",
+      "rationale": "aria-expanded is how a screen reader announces that this control has a popup and that it is currently shut. Omitting it until opening leaves the user unaware there is anything to open.",
+      "status": "not-applicable",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.opens-on-down-arrow",
+      "title": "Down Arrow opens the popup",
+      "rationale": "Down Arrow is the APG-specified way to open the list. If it does nothing, a keyboard user has no way to browse the options.",
+      "status": "not-applicable",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.expanded-state-communicated",
+      "title": "aria-expanded becomes true when the popup opens",
+      "rationale": "A sighted user sees the list appear. Without the state change, a screen reader user is never told it did.",
+      "status": "not-applicable",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.popup-has-listbox-role",
+      "title": "The popup exposes role=listbox",
+      "rationale": "The listbox role is what makes the popup navigable as a set of options rather than announced as unstructured content.",
+      "status": "not-applicable",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.controls-popup",
+      "title": "The combobox references its popup with aria-controls",
+      "rationale": "The relationship is what lets assistive technology connect the input to the list it drives, rather than treating them as unrelated regions.",
+      "status": "not-applicable",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "1.3.1 Info and Relationships",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.options-have-option-role",
+      "title": "Each option exposes role=option",
+      "rationale": "Without the option role, a screen reader cannot count the choices, announce position within them, or let the user jump between them.",
+      "status": "not-applicable",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.arrow-moves-active-option",
+      "title": "Down Arrow moves through the options",
+      "rationale": "Browsing the list is the entire purpose of the control. If the arrow keys do not move between options, a keyboard user cannot reach anything but the first.",
+      "status": "not-applicable",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.active-option-communicated",
+      "title": "The active option is exposed to assistive technology",
+      "rationale": "A sighted user sees the highlight move. Unless it is communicated through aria-activedescendant or DOM focus, a screen reader user is never told which option they are on.",
+      "status": "not-applicable",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.focus-remains-on-combobox",
+      "title": "DOM focus stays on the combobox while the popup is open",
+      "rationale": "The APG pattern keeps focus on the input so the user can keep typing to filter while browsing. Moving focus into the list breaks that and is a common source of confusing behaviour.",
+      "status": "not-applicable",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.enter-selects-active-option",
+      "title": "Enter selects the active option",
+      "rationale": "Selecting is the point of the control. If Enter does not commit the active option, a keyboard user can browse the list but never choose from it.",
+      "status": "not-applicable",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    },
+    {
+      "id": "combobox.escape-closes",
+      "title": "Escape closes the popup",
+      "rationale": "Escape is the learned way out. Without it a user who opened the list by accident has no obvious way to dismiss it.",
+      "status": "not-applicable",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "reason": "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
+      "durationMs": 0,
+      "logs": []
+    }
+  ],
+  "trace": "traces/radix.combobox.zip"
+}
