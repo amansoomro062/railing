@@ -30,7 +30,17 @@ const unsupported: Record<string, string> = {
     "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
 };
 
-const component = window.location.pathname.replace(/^\/harness\//, "").replace(/\/$/, "");
+/**
+ * The runner navigates to /harness/<component> and relies on Vite's SPA
+ * fallback. A statically hosted copy (the playground serves the built bundle
+ * as plain files) has no fallback, so ?component=<id> is accepted as the
+ * equivalent. The path form wins when both are present, so the runner's
+ * behaviour is unchanged.
+ */
+const fromPath = window.location.pathname.startsWith("/harness/")
+  ? window.location.pathname.replace(/^\/harness\//, "").replace(/\/$/, "")
+  : "";
+const component = fromPath || new URLSearchParams(window.location.search).get("component") || "";
 const Harness = harnesses[component];
 const unsupportedReason = unsupported[component];
 
