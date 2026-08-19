@@ -39,6 +39,9 @@ button:hover {
    open/closed marker is drawn from aria-expanded and nothing else. */
 button[aria-expanded]::after {
   content: "+";
+  display: inline-block;
+  width: 1em;
+  text-align: center;
   margin-left: 10px;
   color: #8d867a;
 }
@@ -140,7 +143,9 @@ h3 > button[aria-expanded] {
   outline: 0;
 }
 
-/* Tabs: selection state comes from aria-selected alone. */
+/* Tabs: selection state comes from aria-selected alone. Selection is shown
+   with colour and the underline, never font-weight: bold text is wider, and
+   a selected tab that grows makes its neighbours shift. */
 [role="tablist"] {
   display: flex;
   gap: 4px;
@@ -151,6 +156,7 @@ h3 > button[aria-expanded] {
 [role="tab"] {
   border: 0;
   background: none;
+  color: #6b655c;
   border-radius: 8px 8px 0 0;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
@@ -159,7 +165,7 @@ h3 > button[aria-expanded] {
 
 [role="tab"][aria-selected="true"] {
   border-bottom-color: #121c22;
-  font-weight: 600;
+  color: #121c22;
 }
 
 [role="tabpanel"] {
