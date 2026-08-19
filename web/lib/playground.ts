@@ -33,6 +33,8 @@ export interface RowSpec {
 
 export interface PatternDef {
   title: string;
+  /** One line for the index card: what your keyboard is about to do. */
+  blurb: string;
   steps: StepChip[];
   rows: RowSpec[];
 }
@@ -77,6 +79,7 @@ const absent = (v: string | null): RowReading => ({ value: v ?? "absent", ok: v 
 
 const menu: PatternDef = {
   title: "Menu button",
+  blurb: "Open with Enter or Down Arrow, walk the items, watch aria-expanded flip in the readout.",
   steps: [
     { key: "Tab", text: "reach the trigger" },
     { key: "↓", text: "should open with the first item active" },
@@ -128,6 +131,7 @@ const menu: PatternDef = {
 
 const accordion: PatternDef = {
   title: "Accordion",
+  blurb: "Headers, headings and aria-controls, with Enter and Space both doing their job.",
   steps: [
     { key: "Tab", text: "reach the first header" },
     { key: "Enter", text: "should toggle the section" },
@@ -164,6 +168,7 @@ const accordion: PatternDef = {
 
 const dialog: PatternDef = {
   title: "Dialog (modal)",
+  blurb: "Tab cycles inside, Escape hands focus back, and the background disappears from AT.",
   steps: [
     { key: "Tab", text: "reach the trigger" },
     { key: "Enter", text: "should open with focus inside" },
@@ -201,6 +206,7 @@ const dialog: PatternDef = {
 
 const tabs: PatternDef = {
   title: "Tabs",
+  blurb: "One tab stop for the list, arrows between tabs, each panel labelled by its tab.",
   steps: [
     { key: "Tab", text: "reach the selected tab in one stop" },
     { key: "→ / ←", text: "should move between tabs" },
@@ -239,6 +245,7 @@ const tabs: PatternDef = {
 
 const combobox: PatternDef = {
   title: "Combobox",
+  blurb: "Down Arrow opens the list without typing, and every option is exposed or counted.",
   steps: [
     { key: "Tab", text: "reach the input" },
     { key: "↓", text: "should open the list, no typing needed" },
