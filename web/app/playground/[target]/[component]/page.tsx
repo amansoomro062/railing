@@ -99,7 +99,11 @@ export default async function PlaygroundPage({
         </p>
       </div>
 
-      <PlaygroundView component={component} mountSrc={mountSrc} />
+      <PlaygroundView
+        component={component}
+        mountSrc={mountSrc}
+        mountNote={run?.target.notes ?? "The measured mount, untouched."}
+      />
 
       {harnessSource ? (
         <details className="pg-source">

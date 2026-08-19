@@ -9,7 +9,15 @@ import { PATTERNS, PLAYGROUND_DISCLAIMER, type RowReading } from "@/lib/playgrou
  * mount is never touched. Verdict colouring comes from the DOM at this moment,
  * never from stored findings, so the same component serves any library.
  */
-export function PlaygroundView({ component, mountSrc }: { component: string; mountSrc: string }) {
+export function PlaygroundView({
+  component,
+  mountSrc,
+  mountNote,
+}: {
+  component: string;
+  mountSrc: string;
+  mountNote?: string;
+}) {
   const pattern = PATTERNS[component];
   const frame = useRef<HTMLIFrameElement>(null);
   const [readings, setReadings] = useState<RowReading[] | null>(null);
@@ -60,7 +68,7 @@ export function PlaygroundView({ component, mountSrc }: { component: string; mou
           className="pg-frame"
         />
         <p className="pg-mountnote">
-          The measured mount, untouched. Click into it once, then it is keyboard from there.
+          {mountNote} Click into it once, then it is keyboard from there.
         </p>
       </div>
 

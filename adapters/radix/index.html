@@ -4,6 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Railing harness, Radix UI</title>
+    <style>
+      /*
+       * Page furniture only. The body and the harness's own anchor buttons
+       * (hr-before, hr-after, hr-outside-content) are harness code and may
+       * look tidy; the library's rendered output gets no CSS at all, ever.
+       * This file is served identically to the runner and the playground,
+       * so the measured environment and the visible one cannot drift.
+       */
+      body {
+        font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        color: #211f1b;
+        margin: 0;
+        padding: 30px 34px;
+        line-height: 1.5;
+        background: #fff;
+      }
+      [data-testid="hr-before"],
+      [data-testid="hr-after"],
+      [data-testid="hr-outside-content"] {
+        font: inherit;
+        font-size: 13px;
+        color: #7a746a;
+        background: #f4f2ee;
+        border: 1px solid #e0dbd2;
+        border-radius: 6px;
+        padding: 4px 10px;
+        margin: 4px 6px 4px 0;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
