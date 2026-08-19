@@ -5,7 +5,7 @@
   "scripts": {
     "build": "next build --webpack",
     "dev": "next dev --webpack -p 5310",
-    "prebuild": "node scripts/emit-api.mjs",
+    "prebuild": "node scripts/emit-api.mjs && node scripts/build-mounts.mjs",
     "start": "npx serve out -l 5311",
     "test": "tsx --test test/*.test.ts",
     "typecheck": "tsc --noEmit"
