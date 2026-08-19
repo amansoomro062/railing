@@ -155,11 +155,21 @@ if (!existsSync(resultsDir)) {
   process.exit(1);
 }
 
-const targets = JSON.parse(readFileSync(join(root, "targets.json"), "utf8")).targets;
+// The report narratives (adapterCorrections, causes) describe findings, so
+// they live in results/notify-notes.json, untracked with the results
+// themselves, rather than in the public targets.json. A registry entry says a
+// library exists and where its clock stands; it must never say what we found.
+const notesPath = join(resultsDir, "notify-notes.json");
+const privateNotes = existsSync(notesPath) ? JSON.parse(readFileSync(notesPath, "utf8")) : {};
+const targets = JSON.parse(readFileSync(join(root, "targets.json"), "utf8")).targets.map((t) => ({
+  ...t,
+  ...(privateNotes[t.id] ?? {}),
+}));
 const only = process.argv[2];
 
 const byTarget = new Map();
 for (const file of readdirSync(resultsDir).filter((f) => f.endsWith(".json"))) {
+  if (file === "notify-notes.json") continue; // the narrative overlay, not a run
   const r = JSON.parse(readFileSync(join(resultsDir, file), "utf8"));
   if (r.target.id === "_fixture-broken") continue;
   if (!byTarget.has(r.target.id)) byTarget.set(r.target.id, []);

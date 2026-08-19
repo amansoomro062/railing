@@ -71,6 +71,9 @@ const runs = [];
 if (existsSync(resultsDir)) {
   for (const file of (await readdir(resultsDir)).filter((f) => f.endsWith(".json"))) {
     const run = JSON.parse(await readFile(join(resultsDir, file), "utf8"));
+    // notify-notes.json (private report narratives) lives here too; anything
+    // without a target is not a run.
+    if (!run?.target?.id) continue;
     if (run.target.id === "_fixture-broken") continue;
     if (run.harnessError) continue;
     if (run.assertions.some((a) => a.status === "error")) continue;
