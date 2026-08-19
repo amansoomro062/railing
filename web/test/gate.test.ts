@@ -50,12 +50,17 @@ test("an unparseable date does not release it", () => {
   assert.equal(releasable(target("not a date"), NOW).ok, false);
 });
 
-test("nothing in the repository is releasable right now", async () => {
-  // A standing assertion about real data: if this ever fails, either a
-  // notification genuinely went out and the date was recorded, or something
-  // set a date that should not have been set.
+test("exactly the expected libraries are releasable right now", async () => {
+  // A standing assertion about real data: when this fails, either a clock
+  // genuinely ran out (add the library here, deliberately, as part of its
+  // release) or something set a date that should not have been set.
+  //
+  // Radix UI: notified 5 Aug 2026, fourteen-day window ended 19 Aug 2026.
+  // Next clocks: headlessui, chakra, mui, react-spectrum on 23 Aug; antd on
+  // 27 Aug; shadcn has not been notified.
+  const expected = ["Radix UI"];
   const { loadTargets } = await import("../lib/data.js");
   const targets = await loadTargets();
   const open = targets.filter((t) => releasable(t).ok).map((t) => t.name);
-  assert.deepEqual(open, [], `these would publish: ${open.join(", ")}`);
+  assert.deepEqual(open.sort(), expected.sort(), `releasable now: ${open.join(", ")}`);
 });
