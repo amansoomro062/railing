@@ -49,6 +49,13 @@ keyboard walkthrough + live DOM readout rows (150ms read-only poll).
 
 ## Phase B — guided check-runner + report builder
 
+_B.1 landed 19 Aug, same day as Phase A: the editable pane. Each detail page
+carries a Sandpack editor seeded with the harness source (workspace imports
+rewritten to a shim generated from @railing-dev/spec at build time) and the
+library pinned at the scored version. Stated on-page: it runs on CodeSandbox's
+bundler and is an experiment space, not the measurement. Remaining B items
+below._
+
 The page runs the checks on the visitor: "press Down Arrow now" → observes the
 DOM → marks the check pass/fail live, check by check, until the visitor has
 personally executed the audit.

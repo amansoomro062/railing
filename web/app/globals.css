@@ -1420,3 +1420,10 @@ thead th {
 .card--2 .n {
   color: rgba(255, 255, 255, 0.75);
 }
+
+.pg-editor {
+  margin: 6px 0 26px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(18, 28, 34, 0.35);
+}

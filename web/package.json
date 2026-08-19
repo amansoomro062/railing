@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.20.0",
     "@railing-dev/markdown": "workspace:*",
     "@railing-dev/report": "workspace:*",
     "@railing-dev/spec": "workspace:*",

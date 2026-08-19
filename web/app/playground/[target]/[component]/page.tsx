@@ -5,7 +5,9 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { loadSite, ROOT } from "@/lib/data";
 import { playgroundParams, PATTERNS } from "@/lib/playground";
+import { buildSandboxProject } from "@/lib/sandbox-files";
 import { PlaygroundView } from "@/components/playground-view";
+import { PlaygroundEditor } from "@/components/playground-editor";
 import { REPO } from "@/components/chrome";
 
 /**
@@ -82,6 +84,9 @@ export default async function PlaygroundPage({
   const harnessPath = join(ROOT, "adapters", target, "src", "harnesses", `${component}.tsx`);
   const harnessSource = await readFile(harnessPath, "utf8").catch(() => null);
   const harnessRepoUrl = `${REPO}/blob/main/adapters/${target}/src/harnesses/${component}.tsx`;
+  const sandbox = harnessSource
+    ? await buildSandboxProject(harnessSource, (run?.target.versions as Record<string, string>) ?? {})
+    : null;
 
   return (
     <>
@@ -106,6 +111,19 @@ export default async function PlaygroundPage({
         source={harnessSource}
         sourceUrl={harnessRepoUrl}
       />
+
+      {sandbox ? (
+        <>
+          <h2 className="pg-h">Edit the mount</h2>
+          <p className="pg-sectionnote">
+            The same harness source, editable, with {t?.name ?? target} resolved at the exact
+            scored version. Change the code and the output rebuilds. This pane is an experiment
+            space running on CodeSandbox&apos;s bundler; the measurement, and the readout above,
+            belong to the untouched mount.
+          </p>
+          <PlaygroundEditor files={sandbox.files} dependencies={sandbox.dependencies} />
+        </>
+      ) : null}
     </>
   );
 }
