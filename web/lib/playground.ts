@@ -150,8 +150,18 @@ const accordion: PatternDef = {
     },
     {
       label: "header aria-controls",
-      expected: "references the panel it expands",
-      read: (doc) => absent(attr(doc, '[data-testid="hr-header-1"]', "aria-controls")),
+      expected: "references the panel, at least while open",
+      read: (doc) => {
+        // Some libraries only render the reference while the panel exists:
+        // aria-controls pointing at nothing would itself be invalid. Absent
+        // while collapsed is a fact, not a failure; the scored check expands
+        // the section before asserting, and so should the reader.
+        const controls = attr(doc, '[data-testid="hr-header-1"]', "aria-controls");
+        const expanded = attr(doc, '[data-testid="hr-header-1"]', "aria-expanded");
+        if (controls) return { value: controls, ok: true };
+        if (expanded !== "true") return { value: "absent while collapsed, open it", ok: true };
+        return { value: "absent while open", ok: false };
+      },
     },
     {
       label: "first header aria-expanded",

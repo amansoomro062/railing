@@ -4,19 +4,23 @@ import { useEffect, useRef, useState } from "react";
 import { PATTERNS, PLAYGROUND_DISCLAIMER, type RowReading } from "@/lib/playground";
 
 /**
- * The live half of a playground page: the exact adapter mount in a same-origin
- * iframe, and readout rows that poll its document. The poll is read-only; the
- * mount is never touched. Verdict colouring comes from the DOM at this moment,
+ * The sandbox view: the harness source on the left, verbatim, and the running
+ * mount with its live readout on the right. The poll is read-only; the mount
+ * is never touched. Verdict colouring comes from the DOM at this moment,
  * never from stored findings, so the same component serves any library.
  */
 export function PlaygroundView({
   component,
   mountSrc,
   mountNote,
+  source,
+  sourceUrl,
 }: {
   component: string;
   mountSrc: string;
   mountNote?: string;
+  source?: string | null;
+  sourceUrl?: string;
 }) {
   const pattern = PATTERNS[component];
   const frame = useRef<HTMLIFrameElement>(null);
@@ -61,44 +65,64 @@ export function PlaygroundView({
         ))}
       </div>
 
-      <div className="pg-mount">
-        <iframe
-          ref={frame}
-          src={mountSrc}
-          title={`${pattern.title} mount, exactly as measured`}
-          className="pg-frame"
-        />
-        <p className="pg-mountnote">
-          {mountNote} Click into it once, then it is keyboard from there.
-        </p>
-      </div>
+      <div className="pg-split">
+        <section className="pg-pane pg-pane--code" aria-label="The mount's source">
+          <div className="pg-pane__bar">
+            <span>The mount&apos;s source, verbatim</span>
+            {sourceUrl ? (
+              <a href={sourceUrl} rel="noopener">
+                on GitHub
+              </a>
+            ) : null}
+          </div>
+          <pre>
+            <code>{source ?? "Source unavailable for this mount."}</code>
+          </pre>
+        </section>
 
-      <h2 className="pg-h">Live DOM readout</h2>
-      <div className="tablewrap">
-        <table>
-          <caption className="visually-hidden">Live DOM readout for the {pattern.title} mount.</caption>
-          <thead>
-            <tr>
-              <th scope="col">Reading</th>
-              <th scope="col">Now</th>
-              <th scope="col">APG expects</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pattern.rows.map((row, i) => {
-              const r = readings?.[i];
-              return (
-                <tr key={row.label}>
-                  <td className="pg-label">{row.label}</td>
-                  <td className={r ? (r.ok ? "pg-ok" : "pg-bad") : undefined}>{r ? r.value : "…"}</td>
-                  <td className="pg-expected">{row.expected}</td>
+        <section className="pg-pane" aria-label="Live output">
+          <div className="pg-pane__bar">
+            <span>Live output</span>
+            <span className="pg-pane__hint">click in once, then keyboard</span>
+          </div>
+          <iframe
+            ref={frame}
+            src={mountSrc}
+            title={`${pattern.title} mount, exactly as measured`}
+            className="pg-frame"
+          />
+          <div className="tablewrap pg-readout">
+            <table>
+              <caption className="visually-hidden">
+                Live DOM readout for the {pattern.title} mount.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Reading</th>
+                  <th scope="col">Now</th>
+                  <th scope="col">APG expects</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {pattern.rows.map((row, i) => {
+                  const r = readings?.[i];
+                  return (
+                    <tr key={row.label}>
+                      <td className="pg-label">{row.label}</td>
+                      <td className={r ? (r.ok ? "pg-ok" : "pg-bad") : undefined}>
+                        {r ? r.value : "…"}
+                      </td>
+                      <td className="pg-expected">{row.expected}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
 
+      {mountNote ? <p className="pg-mountnote">{mountNote}</p> : null}
       <p className="pg-disclaimer">{PLAYGROUND_DISCLAIMER}</p>
     </>
   );

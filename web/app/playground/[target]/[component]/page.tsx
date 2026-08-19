@@ -103,20 +103,9 @@ export default async function PlaygroundPage({
         component={component}
         mountSrc={mountSrc}
         mountNote={run?.target.notes ?? "The measured mount, untouched."}
+        source={harnessSource}
+        sourceUrl={harnessRepoUrl}
       />
-
-      {harnessSource ? (
-        <details className="pg-source">
-          <summary>The mount&apos;s source, verbatim</summary>
-          <p className="pg-mountnote">
-            This is the whole of the library-specific code behind the mount above, from the same
-            build. Also <a href={harnessRepoUrl} rel="noopener">on GitHub</a>.
-          </p>
-          <pre>
-            <code>{harnessSource}</code>
-          </pre>
-        </details>
-      ) : null}
     </>
   );
 }
