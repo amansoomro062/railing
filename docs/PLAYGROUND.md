@@ -33,6 +33,14 @@ by choice.
 5. **Credit what passes.** Walkthrough steps are colour-coded pass/fail/neutral
    (proven format: notifications/antd/repro-sandbox-App.tsx). Green rows are as
    prominent as red ones. The instrument measures; it does not campaign.
+6. **Example styling is a lens, not the mount.** Headless libraries render
+   browser defaults, which visitors misread as broken. The page offers an
+   off-by-default toggle that injects cosmetic CSS into the iframe
+   (web/lib/polish.ts); the bundle stays byte-identical to what the runner
+   measured. Every selector is an ARIA attribute, role, or state the library
+   itself rendered — no classes, no test ids — so the polish working is
+   itself a demonstration that the semantics are right. Guarded by test:
+   never display:none, never pointer-events, never harness plumbing.
 
 ## Phase A — observation playground (NOW)
 

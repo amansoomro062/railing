@@ -80,3 +80,16 @@ test("the self-run disclaimer says what it must", () => {
   assert.match(PLAYGROUND_DISCLAIMER, /approximated in-browser/);
   assert.match(PLAYGROUND_DISCLAIMER, /Playwright traces/);
 });
+
+test("example styling is cosmetic and selected on semantics only", async () => {
+  const { POLISH_CSS } = await import("../lib/polish.js");
+  // Cosmetic only: the sheet must never hide content or suppress events —
+  // either would change what the walkthrough observes.
+  assert.doesNotMatch(POLISH_CSS, /display:\s*none/);
+  assert.doesNotMatch(POLISH_CSS, /visibility:\s*hidden/);
+  assert.doesNotMatch(POLISH_CSS, /pointer-events/);
+  // And selected on what the library announced, never on harness plumbing.
+  assert.doesNotMatch(POLISH_CSS, /data-testid/);
+  // No class selectors: a class is library-internal, not announced semantics.
+  assert.doesNotMatch(POLISH_CSS, /\n\.[a-zA-Z]/);
+});

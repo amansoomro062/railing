@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { PATTERNS, type RowReading } from "@/lib/playground";
+import { POLISH_CSS } from "@/lib/polish";
 
 /**
  * The keyboard walkthrough: the running mount on the left, the live DOM
@@ -23,11 +24,24 @@ export function PlaygroundView({
   const pattern = PATTERNS[component];
   const frame = useRef<HTMLIFrameElement>(null);
   const [readings, setReadings] = useState<RowReading[] | null>(null);
+  const [polished, setPolished] = useState(false);
 
   useEffect(() => {
     const id = setInterval(() => {
       const doc = frame.current?.contentDocument;
       if (!doc || !pattern) return;
+      // Keep the example-styling sheet in step with the toggle. Done inside
+      // the poll so it survives an iframe reload; the bundle itself is never
+      // touched, the page adds or removes one style element.
+      const sheet = doc.getElementById("pg-polish");
+      if (polished && !sheet) {
+        const el = doc.createElement("style");
+        el.id = "pg-polish";
+        el.textContent = POLISH_CSS;
+        doc.head.appendChild(el);
+      } else if (!polished && sheet) {
+        sheet.remove();
+      }
       // Hold the neutral "…" state until the harness has actually rendered:
       // an empty document would read as a page of failures, and a wrong red
       // is worse here than a late one.
@@ -47,7 +61,7 @@ export function PlaygroundView({
       );
     }, 250);
     return () => clearInterval(id);
-  }, [pattern]);
+  }, [pattern, polished]);
 
   if (!pattern) return null;
 
@@ -66,7 +80,17 @@ export function PlaygroundView({
         <section className="pg-pane" aria-label="Live output">
           <div className="pg-pane__bar">
             <span>The mount, live</span>
-            <span className="pg-pane__hint">click in once, then keyboard</span>
+            <span className="pg-pane__tools">
+              <span className="pg-pane__hint">click in once, then keyboard</span>
+              <button
+                type="button"
+                className="pg-polishtoggle"
+                aria-pressed={polished}
+                onClick={() => setPolished((p) => !p)}
+              >
+                example styling
+              </button>
+            </span>
           </div>
           <iframe
             ref={frame}
@@ -117,6 +141,12 @@ export function PlaygroundView({
       </div>
 
       {mountNote ? <p className="pg-mountnote">{mountNote}</p> : null}
+      {polished ? (
+        <p className="pg-mountnote">
+          Example styling is cosmetic CSS this page injects, selected only on the ARIA the checks
+          read; the score was measured on the bare mount, and the readout is unaffected.
+        </p>
+      ) : null}
     </>
   );
 }

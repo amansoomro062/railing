@@ -1343,6 +1343,40 @@ thead th {
   color: var(--ink-3);
 }
 
+.pg-pane__tools {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+/* The example-styling toggle: a small pressed/unpressed pill. */
+.pg-polishtoggle {
+  font: inherit;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px var(--sp-3);
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.pg-polishtoggle:hover {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}
+
+.pg-polishtoggle[aria-pressed="true"],
+.pg-polishtoggle[aria-pressed="true"]:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
 .pg-frame {
   display: block;
   width: 100%;
