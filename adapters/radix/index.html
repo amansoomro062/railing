@@ -16,9 +16,15 @@
         font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
         color: #211f1b;
         margin: 0;
-        padding: 30px 34px;
         line-height: 1.5;
         background: #fff;
+      }
+      /* Page padding lives on #root, not body: scroll-lock libraries
+         (react-remove-scroll-bar, used by modal popups) zero the body's
+         padding while a popup is open, and padding on body would make the
+         whole page jump on open and close. */
+      #root {
+        padding: 30px 34px;
       }
       /* Tab-stop rails, not content: the checks are about focus entering and
          leaving the component, which needs a known stop on each side. Styled
