@@ -13,7 +13,7 @@ import { getSpec, specs } from "@railing-dev/spec";
  * rather than with a number.
  */
 export default async function Home() {
-  const { targets, results } = await loadSite();
+  const { targets, results, released } = await loadSite();
   const { decisions } = parseDecisions(await loadDoc("DECISIONS.md"));
   const measured = targets.filter((t) => t.status !== "planned").length;
   const assertions = Object.values(specs).reduce((n, s) => n + s.assertions.length, 0);
@@ -39,7 +39,7 @@ export default async function Home() {
             Read the method
           </Link>
           <Link className="pill pill--glass" href="/results">
-            Why there are no scores yet
+            {released.length === 0 ? "Why there are no scores yet" : "See the scores"}
           </Link>
         </div>
 
