@@ -60,12 +60,14 @@ export function Nav() {
           </li>
         ))}
       </ul>
-      <a className="pill" href={REPO} rel="noopener">
-        GitHub
-      </a>
-      <a className="pill" href="/playground/" target="_blank" rel="noopener">
-        Playground
-      </a>
+      <div className="nav__actions">
+        <a className="pill" href={REPO} rel="noopener">
+          GitHub
+        </a>
+        <a className="pill" href="/playground/" target="_blank" rel="noopener">
+          Playground
+        </a>
+      </div>
     </nav>
   );
 }

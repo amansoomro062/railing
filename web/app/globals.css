@@ -1299,3 +1299,66 @@ thead th {
   line-height: 1.5;
   margin-top: 10px;
 }
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pg-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.pg-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 18px 18px 44px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.pg-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgb(18 28 34 / 0.08);
+}
+
+.pg-card__eyebrow {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.pg-card__title {
+  font-weight: 650;
+  font-size: 1.05rem;
+}
+
+.pg-card__sub {
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+
+.pg-card__go {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink-2);
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { specs } from "@railing-dev/spec";
 import { loadSite, NOTICE_DAYS } from "@/lib/data";
 import { playgroundParams, PATTERNS, PLAYGROUND_DISCLAIMER } from "@/lib/playground";
 
@@ -52,15 +53,21 @@ export default async function Playground() {
           return (
             <section key={target} style={{ marginTop: 28 }}>
               <h2>{t?.name ?? target}</h2>
-              <ul className="pg-list">
-                {components.map((c) => (
-                  <li key={c}>
-                    <Link href={`/playground/${target}/${c}/`}>
-                      {PATTERNS[c]?.title ?? c}
+              <div className="pg-cards">
+                {components.map((c) => {
+                  const spec = specs[c as keyof typeof specs];
+                  return (
+                    <Link className="pg-card" key={c} href={`/playground/${target}/${c}/`}>
+                      <span className="pg-card__eyebrow">{c}</span>
+                      <span className="pg-card__title">{PATTERNS[c]?.title ?? c}</span>
+                      <span className="pg-card__sub">
+                        {spec ? `${spec.assertions.length} checks, each citing a clause` : "live mount"}
+                      </span>
+                      <span className="pg-card__go" aria-hidden="true">&rarr;</span>
                     </Link>
-                  </li>
-                ))}
-              </ul>
+                  );
+                })}
+              </div>
             </section>
           );
         })
