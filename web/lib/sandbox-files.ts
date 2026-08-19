@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { TEXT, TEST_ID_ATTRIBUTE, META_GLOBAL, READY_ATTRIBUTE } from "@railing-dev/spec";
 import { ROOT } from "@/lib/data";
+import { POLISH_CSS } from "@/lib/polish";
 
 /**
  * Build the file set for the editable sandbox.
@@ -60,6 +61,9 @@ export async function buildSandboxProject(
     'import React from "react";',
     'import { createRoot } from "react-dom/client";',
     'import "./styles.css";',
+    "// Example styling, cosmetic and selected on ARIA alone. Delete this",
+    "// line to see the bare mount, exactly as the score was measured.",
+    'import "./polish.css";',
     `import { ${componentName} } from "./App";`,
     "",
     'const root = createRoot(document.getElementById("root")!);',
@@ -91,12 +95,22 @@ export async function buildSandboxProject(
     "",
   ].join("\n");
 
+  const polish = [
+    "/* Example styling: every selector is a role, ARIA attribute, or state",
+    "   the library itself rendered — no classes, no test ids. If restyling",
+    "   this breaks, the semantics broke first. Cosmetic only; the score was",
+    "   measured with no styling at all. */",
+    POLISH_CSS.trim(),
+    "",
+  ].join("\n");
+
   return {
     files: {
       "/App.tsx": appSource,
       "/harness-kit.ts": await harnessKitShim(),
       "/index.tsx": index,
       "/styles.css": styles,
+      "/polish.css": polish,
     },
     dependencies: versions,
   };

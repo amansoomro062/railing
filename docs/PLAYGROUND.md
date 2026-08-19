@@ -40,7 +40,10 @@ by choice.
    measured. Every selector is an ARIA attribute, role, or state the library
    itself rendered — no classes, no test ids — so the polish working is
    itself a demonstration that the semantics are right. Guarded by test:
-   never display:none, never pointer-events, never harness plumbing.
+   never display:none, never pointer-events, never harness plumbing. The
+   live sandbox ships the same sheet as a visible polish.css, imported with
+   a delete-me comment: there, on by default, because the sandbox is the
+   experiment space, not the measurement.
 
 ## Phase A — observation playground (NOW)
 

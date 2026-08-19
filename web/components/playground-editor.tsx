@@ -28,7 +28,7 @@ export function PlaygroundEditor({
         customSetup={{ dependencies }}
         options={{
           activeFile: "/App.tsx",
-          visibleFiles: ["/App.tsx", "/harness-kit.ts", "/styles.css"],
+          visibleFiles: ["/App.tsx", "/polish.css", "/harness-kit.ts", "/styles.css"],
           editorHeight: 560,
           showLineNumbers: true,
           showTabs: true,

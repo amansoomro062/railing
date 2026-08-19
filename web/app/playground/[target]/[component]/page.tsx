@@ -146,8 +146,9 @@ export default async function PlaygroundPage({
                     <>
                       <p className="pg-sectionnote">
                         The same mount source, editable, with {t?.name ?? target} resolved at the
-                        exact scored version. Change the code and the output rebuilds. Runs on
-                        CodeSandbox&apos;s bundler; the measurement belongs to the untouched mount.
+                        exact scored version. Example styling ships as polish.css; delete its
+                        import for the bare mount. Runs on CodeSandbox&apos;s bundler; the
+                        measurement belongs to the untouched mount.
                       </p>
                       <PlaygroundEditor files={sandbox.files} dependencies={sandbox.dependencies} />
                     </>
