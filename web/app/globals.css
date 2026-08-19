@@ -1273,10 +1273,51 @@ thead th {
 }
 
 .pg-disclaimer {
-  border-top: 1px solid var(--line);
-  padding-top: 12px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--ink-3);
+  max-width: 74ch;
+  margin: 30px 0 58px;
+}
+
+.pg-section {
+  margin-top: 44px;
+}
+
+.pg-section h2 {
+  margin-bottom: 6px;
+}
+
+.pg-sectionnote {
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  max-width: 62ch;
+  margin-bottom: 4px;
+}
+
+.cards--pg {
+  margin-top: 18px;
+}
+
+.pg-card--locked {
+  min-height: 210px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #f4f2ee 0px,
+    #f4f2ee 14px,
+    #efece6 14px,
+    #efece6 28px
+  );
+  color: var(--ink-2);
+  border-style: dashed;
+}
+
+.pg-h {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 30px 0 10px;
+  font-weight: 650;
 }
 
 .pg-source {

@@ -51,6 +51,7 @@ export function PlaygroundView({
 
   return (
     <>
+      <h2 className="pg-h">Keyboard walkthrough</h2>
       <div className="pg-steps" aria-label="Keyboard walkthrough">
         {pattern.steps.map((s, i) => (
           <span className="pg-step" key={i}>
@@ -72,6 +73,7 @@ export function PlaygroundView({
         </p>
       </div>
 
+      <h2 className="pg-h">Live DOM readout</h2>
       <div className="tablewrap">
         <table>
           <caption className="visually-hidden">Live DOM readout for the {pattern.title} mount.</caption>

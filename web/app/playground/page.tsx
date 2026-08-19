@@ -51,7 +51,7 @@ export default async function Playground() {
         [...byTarget.entries()].map(([target, components]) => {
           const t = site.targets.find((x) => x.id === target);
           return (
-            <section key={target} style={{ marginTop: 28 }}>
+            <section key={target} className="pg-section">
               <h2>{t?.name ?? target}</h2>
               <div className="cards cards--pg">
                 {components.map((c, i) => {
@@ -74,9 +74,27 @@ export default async function Playground() {
         })
       )}
 
-      <p className="pg-disclaimer" style={{ marginTop: 36 }}>
-        {PLAYGROUND_DISCLAIMER}
-      </p>
+      {site.withheld.length > 0 ? (
+        <section className="pg-section">
+          <h2>Arriving as the clocks end</h2>
+          <p className="pg-sectionnote">
+            Every maintainer gets their results privately, {NOTICE_DAYS} days before anything is
+            published. These libraries are measured, and their playground pages appear the moment
+            their window closes.
+          </p>
+          <div className="cards cards--pg">
+            {site.withheld.map((t) => (
+              <div className="card pg-card--locked" key={t.id}>
+                <p className="n">IN THE DISCLOSURE WINDOW</p>
+                <h3>{t.name}</h3>
+                <p>{t.reason}.</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <p className="pg-disclaimer">{PLAYGROUND_DISCLAIMER}</p>
     </>
   );
 }
