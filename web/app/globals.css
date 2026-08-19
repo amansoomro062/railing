@@ -1278,3 +1278,24 @@ thead th {
   font-size: 0.82rem;
   color: var(--ink-3);
 }
+
+.pg-source {
+  margin-top: 26px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 18px;
+  background: #fff;
+}
+
+.pg-source summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.pg-source pre {
+  overflow-x: auto;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 10px;
+}

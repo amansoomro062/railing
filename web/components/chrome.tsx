@@ -63,6 +63,9 @@ export function Nav() {
       <a className="pill" href={REPO} rel="noopener">
         GitHub
       </a>
+      <a className="pill" href="/playground/" target="_blank" rel="noopener">
+        Playground
+      </a>
     </nav>
   );
 }

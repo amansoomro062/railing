@@ -18,6 +18,14 @@ export function PlaygroundView({ component, mountSrc }: { component: string; mou
     const id = setInterval(() => {
       const doc = frame.current?.contentDocument;
       if (!doc || !pattern) return;
+      // Hold the neutral "…" state until the harness has actually rendered:
+      // an empty document would read as a page of failures, and a wrong red
+      // is worse here than a late one.
+      const root = doc.getElementById("root");
+      if (!root || root.childElementCount === 0) {
+        setReadings(null);
+        return;
+      }
       setReadings(
         pattern.rows.map((row) => {
           try {

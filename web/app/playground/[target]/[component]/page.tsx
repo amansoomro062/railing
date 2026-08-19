@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { loadSite } from "@/lib/data";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { loadSite, ROOT } from "@/lib/data";
 import { playgroundParams, PATTERNS } from "@/lib/playground";
 import { PlaygroundView } from "@/components/playground-view";
+import { REPO } from "@/components/chrome";
 
 /**
  * One interactive page per released, mount-ready library and component: the
@@ -68,7 +71,17 @@ export default async function PlaygroundPage({
         .join(", ")
     : "";
   const base = process.env.RAILING_BASE_PATH ?? "";
-  const mountSrc = `${base}/playground-mounts/${target}/index.html?component=${component}`;
+  // Directory URL plus hash: static hosts canonicalise away index.html and
+  // some drop query strings while doing it, but a fragment never reaches the
+  // server, so no host can eat it.
+  const mountSrc = `${base}/playground-mounts/${target}/#component=${component}`;
+
+  // The whole credibility claim is "the mount is the adapter, verbatim", so
+  // show the adapter, verbatim: the source is read from the same file the
+  // bundle was built from, at the same build.
+  const harnessPath = join(ROOT, "adapters", target, "src", "harnesses", `${component}.tsx`);
+  const harnessSource = await readFile(harnessPath, "utf8").catch(() => null);
+  const harnessRepoUrl = `${REPO}/blob/main/adapters/${target}/src/harnesses/${component}.tsx`;
 
   return (
     <>
@@ -87,6 +100,19 @@ export default async function PlaygroundPage({
       </div>
 
       <PlaygroundView component={component} mountSrc={mountSrc} />
+
+      {harnessSource ? (
+        <details className="pg-source">
+          <summary>The mount&apos;s source, verbatim</summary>
+          <p className="pg-mountnote">
+            This is the whole of the library-specific code behind the mount above, from the same
+            build. Also <a href={harnessRepoUrl} rel="noopener">on GitHub</a>.
+          </p>
+          <pre>
+            <code>{harnessSource}</code>
+          </pre>
+        </details>
+      ) : null}
     </>
   );
 }
