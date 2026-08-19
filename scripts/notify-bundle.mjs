@@ -155,11 +155,21 @@ if (!existsSync(resultsDir)) {
   process.exit(1);
 }
 
-const targets = JSON.parse(readFileSync(join(root, "targets.json"), "utf8")).targets;
+// The report narratives (adapterCorrections, causes) describe findings, so
+// they live in results/notify-notes.json, untracked with the results
+// themselves, rather than in the public targets.json. A registry entry says a
+// library exists and where its clock stands; it must never say what we found.
+const notesPath = join(resultsDir, "notify-notes.json");
+const privateNotes = existsSync(notesPath) ? JSON.parse(readFileSync(notesPath, "utf8")) : {};
+const targets = JSON.parse(readFileSync(join(root, "targets.json"), "utf8")).targets.map((t) => ({
+  ...t,
+  ...(privateNotes[t.id] ?? {}),
+}));
 const only = process.argv[2];
 
 const byTarget = new Map();
 for (const file of readdirSync(resultsDir).filter((f) => f.endsWith(".json"))) {
+  if (file === "notify-notes.json") continue; // the narrative overlay, not a run
   const r = JSON.parse(readFileSync(join(resultsDir, file), "utf8"));
   if (r.target.id === "_fixture-broken") continue;
   if (!byTarget.has(r.target.id)) byTarget.set(r.target.id, []);
@@ -602,19 +612,20 @@ function covering(target, results) {
 
 Hello,
 
-I run Railing, an open source project that tests UI component libraries against
-the W3C ARIA Authoring Practices Guide and publishes the results. ${target.name}
-is one of the libraries measured.
+This report contains accessibility conformance results from Railing, an open
+source project that tests UI component libraries against the W3C ARIA Authoring
+Practices Guide and publishes the results. ${target.name} is one of the
+libraries measured.
 
 ${
   failing === 0
-    ? `${target.name} passes every check. There is nothing to fix, and I am writing only because you should hear about a public score from us rather than come across it, and because you may still disagree with how we measured it.`
+    ? `${target.name} passes every check. There is nothing to fix; this notice exists only because you should hear about a public score from us rather than come across it, and because you may still disagree with how we measured it.`
     : `We found ${failing} issue${failing === 1 ? "" : "s"}${concentration(results)}.${causeClause(target, results)} No score is on our index yet, and none will be for fourteen days.`
 }
 
 The attached report has every check, the specification clause behind it, and the
 complete adapter source so you can see exactly how your components were mounted.
-If we got something wrong, that is the likeliest explanation and I would rather
+If we got something wrong, that is the likeliest explanation and we would rather
 hear it now than publish it. ${failing > 0 ? "If you ship a fix before we publish, we publish the fixed score." : ""}
 
 Happy to give you longer than fourteen days if that helps.

@@ -91,6 +91,9 @@ export async function loadResults(): Promise<Map<string, Map<string, RunResult>>
   const skipped: string[] = [];
   for (const file of (await readdir(dir)).filter((f) => f.endsWith(".json"))) {
     const result = JSON.parse(await readFile(join(dir, file), "utf8")) as RunResult;
+    // Not every JSON in results/ is a run: notify-notes.json holds the private
+    // report narratives. Anything without a target is not a result.
+    if (!result?.target?.id) continue;
     // The fixture exists to test the runner. It is never a library.
     if (result.target.id === "_fixture-broken") continue;
     const verdict = isPublishable(result);

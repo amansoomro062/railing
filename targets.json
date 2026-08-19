@@ -14,7 +14,7 @@
       "role": "control",
       "status": "published",
       "notes": "Calibration control. Widely regarded as the accessibility gold standard, and measured first so that a failure it produces is presumed to be a fault in our assertion. Scores 100% on all five components.",
-      "notifiedOn": null
+      "notifiedOn": "2026-08-09"
     },
     {
       "id": "radix",
@@ -49,8 +49,7 @@
       "unverified": {
         "combobox": "Base UI treats the combobox input as a search field: selecting an option commits to the component's value (confirmed: it becomes \"Banana\") but never writes it into the input. That may be a legitimate variant of the pattern rather than a defect, and this spec is written for the APG editable combobox where the input carries the value. Not published until the pattern match is settled."
       },
-      "notifiedOn": null,
-      "adapterCorrections": "Your dialog scored 76% with two blocker failures on its first run. That was ours: your generated dialog ships its own close button, and our assertion decided containment by looking for a test id, so it treated your button as though it were outside the dialog. Corrected before this report; your dialog passes every check."
+      "notifiedOn": null
     },
     {
       "id": "mui",
@@ -65,19 +64,7 @@
       "role": "subject",
       "status": "published",
       "notes": "Measured. Findings withheld until the maintainer has been notified, per docs/DECISIONS.md 004.",
-      "notifiedOn": null,
-      "adapterCorrections": "Your menu scored 19% on its first run. One real defect cascaded into nine unrelated failures because our helper opened the menu with a key your trigger does not support. Corrected before this report.",
-      "causes": [
-        {
-          "summary": "Three attributes your documentation asks the developer to add",
-          "detail": "Your Menu docs show aria-haspopup, aria-controls and aria-expanded being passed to the trigger button by the developer. We do not pass them, because writing them would measure how carefully we copied your documentation rather than what MUI ships. So all three are absent together, from one decision rather than three defects. If you regard that as the correct division of responsibility, say so and we will publish your reasoning beside the score.",
-          "assertions": [
-            "menu.trigger-has-haspopup",
-            "menu.trigger-collapsed-by-default",
-            "menu.expanded-state-communicated"
-          ]
-        }
-      ]
+      "notifiedOn": "2026-08-09"
     },
     {
       "id": "chakra",
@@ -91,7 +78,7 @@
       "role": "subject",
       "status": "published",
       "notes": "Chakra v3, built on Ark UI. Findings withheld until the maintainer has been notified.",
-      "notifiedOn": null
+      "notifiedOn": "2026-08-09"
     },
     {
       "id": "antd",
@@ -105,27 +92,7 @@
       "role": "subject",
       "status": "published",
       "notes": "Findings verified against the DOM, including with the library's own button component to rule out an adapter fault. Withheld from the site until the maintainer has been notified, per docs/DECISIONS.md 004.",
-      "notifiedOn": null,
-      "adapterCorrections": "Your first run scored 27% on combobox and 42% on accordion. Almost all of that was our adapter, not your library: we required the listbox to be CSS-visible when yours is a zero-height virtual-scroll node a screen reader reaches perfectly well, and we were looking for v5 class names against v6. Both were corrected before this report, and the dialog finding was downgraded from blocker to moderate once we accepted that focus reaching <body> is a wasted stop rather than an escape.",
-      "causes": [
-        {
-          "summary": "The trigger is not marked up as a menu button",
-          "detail": "Dropdown renders its trigger without any of the three attributes that tell assistive technology a menu is attached and whether it is open. They are absent together, and adding them is a single change to the trigger rather than three separate ones.",
-          "assertions": [
-            "menu.trigger-has-haspopup",
-            "menu.trigger-collapsed-by-default",
-            "menu.expanded-state-communicated"
-          ]
-        },
-        {
-          "summary": "Keyboard focus never enters the open menu",
-          "detail": "The menu does open on click, so this is not a failure to open. Focus stays on the trigger and no aria-activedescendant is set, which leaves nothing for the arrow keys to move between. The second finding follows from the first: fix where focus goes on open and both should pass.",
-          "assertions": [
-            "menu.focus-enters-menu-on-open",
-            "menu.arrow-moves-between-items"
-          ]
-        }
-      ]
+      "notifiedOn": "2026-08-13"
     },
     {
       "id": "headlessui",
@@ -139,7 +106,7 @@
       "role": "subject",
       "status": "published",
       "notes": "Measured. Findings withheld until the maintainer has been notified.",
-      "notifiedOn": null
+      "notifiedOn": "2026-08-09"
     }
   ]
 }

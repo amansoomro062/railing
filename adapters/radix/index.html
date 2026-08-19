@@ -4,6 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Railing harness, Radix UI</title>
+    <style>
+      /*
+       * Page furniture only. The body and the harness's own anchor buttons
+       * (hr-before, hr-after, hr-outside-content) are harness code and may
+       * look tidy; the library's rendered output gets no CSS at all, ever.
+       * This file is served identically to the runner and the playground,
+       * so the measured environment and the visible one cannot drift.
+       */
+      body {
+        font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        color: #211f1b;
+        margin: 0;
+        line-height: 1.5;
+        background: #fff;
+      }
+      /* Page padding lives on #root, not body: scroll-lock libraries
+         (react-remove-scroll-bar, used by modal popups) zero the body's
+         padding while a popup is open, and padding on body would make the
+         whole page jump on open and close. */
+      #root {
+        padding: 30px 34px;
+      }
+      /* Tab-stop rails, not content: the checks are about focus entering and
+         leaving the component, which needs a known stop on each side. Styled
+         as the instrument markings they are. */
+      [data-testid="hr-before"],
+      [data-testid="hr-after"],
+      [data-testid="hr-outside-content"] {
+        font: inherit;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        color: #a09a90;
+        background: transparent;
+        border: 1px dashed #d8d2c8;
+        border-radius: 6px;
+        padding: 3px 9px;
+        margin: 4px 6px 10px 0;
+        opacity: 0.85;
+      }
+      [data-testid="hr-before"]::after,
+      [data-testid="hr-after"]::after {
+        content: " · tab stop";
+      }
+      [data-testid="hr-before"]:focus-visible,
+      [data-testid="hr-after"]:focus-visible,
+      [data-testid="hr-outside-content"]:focus-visible {
+        outline: 2px solid #d65630;
+        outline-offset: 2px;
+        opacity: 1;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

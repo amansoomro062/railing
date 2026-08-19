@@ -41,3 +41,6 @@ web/.next
 web/public/api
 web/next-env.d.ts
 web/tsconfig.tsbuildinfo
+
+# Playground mount bundles are build artefacts (see web/scripts/build-mounts.mjs).
+web/public/playground-mounts

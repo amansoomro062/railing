@@ -30,7 +30,21 @@ const unsupported: Record<string, string> = {
     "Radix UI does not ship a combobox primitive. Its Select implements the APG select-only pattern, which has different requirements and is scored separately.",
 };
 
-const component = window.location.pathname.replace(/^\/harness\//, "").replace(/\/$/, "");
+/**
+ * The runner navigates to /harness/<component> and relies on Vite's SPA
+ * fallback. A statically hosted copy (the playground serves the built bundle
+ * as plain files) has no fallback, so #component=<id> is accepted as the
+ * equivalent, with ?component=<id> as a courtesy. The hash form exists because
+ * static hosts love to canonicalise URLs, and a fragment is the one part of a
+ * URL no redirect can eat. The path form wins when present, so the runner's
+ * behaviour is unchanged.
+ */
+const fromPath = window.location.pathname.startsWith("/harness/")
+  ? window.location.pathname.replace(/^\/harness\//, "").replace(/\/$/, "")
+  : "";
+const fromHash = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("component") ?? "";
+const fromQuery = new URLSearchParams(window.location.search).get("component") ?? "";
+const component = fromPath || fromHash || fromQuery;
 const Harness = harnesses[component];
 const unsupportedReason = unsupported[component];
 
