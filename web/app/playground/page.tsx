@@ -90,7 +90,13 @@ export default async function Playground() {
           <div className="cards cards--pg">
             {site.withheld.map((t) => (
               <div className="card pg-card--locked" key={t.id}>
-                <p className="n">IN THE DISCLOSURE WINDOW</p>
+                {/* A library whose maintainer has not been notified has no
+                    window yet, and saying it did would be a lie of ten pixels. */}
+                <p className="n">
+                  {t.reason.startsWith("notified")
+                    ? "IN THE DISCLOSURE WINDOW"
+                    : "MEASURED · NOT YET NOTIFIED"}
+                </p>
                 <h3>{t.name}</h3>
                 <p>{t.reason}.</p>
               </div>
