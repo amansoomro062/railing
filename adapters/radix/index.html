@@ -20,17 +20,33 @@
         line-height: 1.5;
         background: #fff;
       }
+      /* Tab-stop rails, not content: the checks are about focus entering and
+         leaving the component, which needs a known stop on each side. Styled
+         as the instrument markings they are. */
       [data-testid="hr-before"],
       [data-testid="hr-after"],
       [data-testid="hr-outside-content"] {
         font: inherit;
-        font-size: 13px;
-        color: #7a746a;
-        background: #f4f2ee;
-        border: 1px solid #e0dbd2;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        color: #a09a90;
+        background: transparent;
+        border: 1px dashed #d8d2c8;
         border-radius: 6px;
-        padding: 4px 10px;
-        margin: 4px 6px 4px 0;
+        padding: 3px 9px;
+        margin: 4px 6px 10px 0;
+        opacity: 0.85;
+      }
+      [data-testid="hr-before"]::after,
+      [data-testid="hr-after"]::after {
+        content: " · tab stop";
+      }
+      [data-testid="hr-before"]:focus-visible,
+      [data-testid="hr-after"]:focus-visible,
+      [data-testid="hr-outside-content"]:focus-visible {
+        outline: 2px solid #d65630;
+        outline-offset: 2px;
+        opacity: 1;
       }
     </style>
   </head>
