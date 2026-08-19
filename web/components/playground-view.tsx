@@ -1,25 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { PATTERNS, PLAYGROUND_DISCLAIMER, type RowReading } from "@/lib/playground";
+import { PATTERNS, type RowReading } from "@/lib/playground";
 
 /**
- * The sandbox view: the harness source on the left, verbatim, and the running
- * mount with its live readout on the right. The poll is read-only; the mount
- * is never touched. Verdict colouring comes from the DOM at this moment,
- * never from stored findings, so the same component serves any library.
+ * The keyboard walkthrough: the running mount on the left, the live DOM
+ * readout on the right. The poll is read-only; the mount is never touched.
+ * Verdict colouring comes from the DOM at this moment, never from stored
+ * findings, so the same component serves any library.
  */
 export function PlaygroundView({
   component,
   mountSrc,
   mountNote,
-  source,
   sourceUrl,
 }: {
   component: string;
   mountSrc: string;
   mountNote?: string;
-  source?: string | null;
   sourceUrl?: string;
 }) {
   const pattern = PATTERNS[component];
@@ -55,7 +53,6 @@ export function PlaygroundView({
 
   return (
     <>
-      <h2 className="pg-h">Keyboard walkthrough</h2>
       <div className="pg-steps" aria-label="Keyboard walkthrough">
         {pattern.steps.map((s, i) => (
           <span className="pg-step" key={i}>
@@ -66,23 +63,9 @@ export function PlaygroundView({
       </div>
 
       <div className="pg-split">
-        <section className="pg-pane pg-pane--code" aria-label="The mount's source">
-          <div className="pg-pane__bar">
-            <span>The mount&apos;s source, verbatim</span>
-            {sourceUrl ? (
-              <a href={sourceUrl} rel="noopener">
-                on GitHub
-              </a>
-            ) : null}
-          </div>
-          <pre>
-            <code>{source ?? "Source unavailable for this mount."}</code>
-          </pre>
-        </section>
-
         <section className="pg-pane" aria-label="Live output">
           <div className="pg-pane__bar">
-            <span>Live output</span>
+            <span>The mount, live</span>
             <span className="pg-pane__hint">click in once, then keyboard</span>
           </div>
           <iframe
@@ -91,6 +74,17 @@ export function PlaygroundView({
             title={`${pattern.title} mount, exactly as measured`}
             className="pg-frame"
           />
+        </section>
+
+        <section className="pg-pane" aria-label="Live DOM readout">
+          <div className="pg-pane__bar">
+            <span>What the DOM says</span>
+            {sourceUrl ? (
+              <a href={sourceUrl} rel="noopener">
+                mount source on GitHub
+              </a>
+            ) : null}
+          </div>
           <div className="tablewrap pg-readout">
             <table>
               <caption className="visually-hidden">
@@ -123,7 +117,6 @@ export function PlaygroundView({
       </div>
 
       {mountNote ? <p className="pg-mountnote">{mountNote}</p> : null}
-      <p className="pg-disclaimer">{PLAYGROUND_DISCLAIMER}</p>
     </>
   );
 }

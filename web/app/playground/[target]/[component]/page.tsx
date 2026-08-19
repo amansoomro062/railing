@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { loadSite, ROOT } from "@/lib/data";
-import { playgroundParams, PATTERNS } from "@/lib/playground";
+import { playgroundParams, PATTERNS, PLAYGROUND_DISCLAIMER } from "@/lib/playground";
 import { buildSandboxProject } from "@/lib/sandbox-files";
 import { PlaygroundView } from "@/components/playground-view";
 import { PlaygroundEditor } from "@/components/playground-editor";
+import { PlaygroundTabs } from "@/components/playground-tabs";
 import { REPO } from "@/components/chrome";
 
 /**
@@ -68,11 +69,15 @@ export default async function PlaygroundPage({
   const siblings = allowed.filter((p) => p.target === target);
   const run = site.results.get(target)?.get(component);
   const pattern = PATTERNS[component];
-  const versions = run
-    ? Object.entries(run.target.versions ?? {})
-        .map(([k, v]) => `${k}@${v}`)
-        .join(", ")
-    : "";
+  // The adapter's dependency list covers every pattern; the note under the
+  // mount should name only this one. Match on the package name when possible
+  // (react-dialog for dialog, react-dropdown-menu for menu) and fall back to
+  // the full list for single-package libraries.
+  const allVersions = Object.entries(run?.target.versions ?? {});
+  const relevant = allVersions.filter(([k]) => k.includes(component));
+  const versions = (relevant.length > 0 ? relevant : allVersions)
+    .map(([k, v]) => `${k}@${v}`)
+    .join(", ");
   const base = process.env.RAILING_BASE_PATH ?? "";
   // Directory URL plus hash: static hosts canonicalise away index.html and
   // some drop query strings while doing it, but a fragment never reaches the
@@ -92,9 +97,9 @@ export default async function PlaygroundPage({
   return (
     <>
       <div className="pagehead">
-        <p className="eyebrow eyebrow--ink">
-          <Link href="/playground/">&larr; Playground</Link>
-        </p>
+        <Link className="pg-back" href="/playground/">
+          &larr; Playground
+        </Link>
         <h1>
           {t?.name ?? target} · {pattern?.title ?? component}
         </h1>
@@ -111,32 +116,47 @@ export default async function PlaygroundPage({
           ))}
         </nav>
         <p className="lede">
-          The exact mount the score was measured on{versions ? ` (${versions})` : ""}. Walk it with
-          your keyboard and watch the readout. The scored result for this component is{" "}
-          <Link href={`/results/${target}/${component}/`}>here</Link>.
+          The exact mount the score was measured on.{" "}
+          <Link href={`/results/${target}/${component}/`}>Scored result</Link>.
         </p>
       </div>
 
-      <PlaygroundView
-        component={component}
-        mountSrc={mountSrc}
-        mountNote={run?.target.notes ?? "The measured mount, untouched."}
-        source={harnessSource}
-        sourceUrl={harnessRepoUrl}
+      <PlaygroundTabs
+        tabs={[
+          {
+            id: "walkthrough",
+            label: "Keyboard walkthrough",
+            panel: (
+              <PlaygroundView
+                component={component}
+                mountSrc={mountSrc}
+                mountNote={versions ? `Measured on ${versions}.` : undefined}
+                sourceUrl={harnessRepoUrl}
+              />
+            ),
+          },
+          ...(sandbox
+            ? [
+                {
+                  id: "sandbox",
+                  label: "Live sandbox",
+                  panel: (
+                    <>
+                      <p className="pg-sectionnote">
+                        The same mount source, editable, with {t?.name ?? target} resolved at the
+                        exact scored version. Change the code and the output rebuilds. Runs on
+                        CodeSandbox&apos;s bundler; the measurement belongs to the untouched mount.
+                      </p>
+                      <PlaygroundEditor files={sandbox.files} dependencies={sandbox.dependencies} />
+                    </>
+                  ),
+                },
+              ]
+            : []),
+        ]}
       />
 
-      {sandbox ? (
-        <>
-          <h2 className="pg-h">Edit the mount</h2>
-          <p className="pg-sectionnote">
-            The same harness source, editable, with {t?.name ?? target} resolved at the exact
-            scored version. Change the code and the output rebuilds. This pane is an experiment
-            space running on CodeSandbox&apos;s bundler; the measurement, and the readout above,
-            belong to the untouched mount.
-          </p>
-          <PlaygroundEditor files={sandbox.files} dependencies={sandbox.dependencies} />
-        </>
-      ) : null}
+      <p className="pg-disclaimer">{PLAYGROUND_DISCLAIMER}</p>
     </>
   );
 }

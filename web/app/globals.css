@@ -1272,15 +1272,6 @@ thead th {
 
 /* -- detail page ---------------------------------------------------- */
 
-.pg-h {
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin: var(--sp-6) 0 var(--sp-3);
-  font-weight: 650;
-}
-
 .pg-steps {
   display: flex;
   flex-wrap: wrap;
@@ -1309,7 +1300,7 @@ thead th {
   color: var(--ink);
 }
 
-/* The sandbox split: source left, living output right. */
+/* The walkthrough split: the running mount left, the readout right. */
 .pg-split {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
@@ -1350,26 +1341,6 @@ thead th {
   letter-spacing: 0;
   font-weight: 400;
   color: var(--ink-3);
-}
-
-.pg-pane--code {
-  color: #dfe6ea;
-  background: radial-gradient(120% 110% at 18% 0%, #2a3a46 0%, #16212a 55%, #0e151b 100%);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.pg-pane--code .pg-pane__bar {
-  color: rgba(255, 255, 255, 0.65);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
-}
-
-.pg-pane--code pre {
-  margin: 0;
-  padding: var(--sp-4) var(--sp-4) var(--sp-5);
-  overflow: auto;
-  max-height: 720px;
-  font-size: 0.76rem;
-  line-height: 1.55;
 }
 
 .pg-frame {
@@ -1429,9 +1400,25 @@ thead th {
   .pg-split {
     grid-template-columns: 1fr;
   }
-  .pg-pane--code pre {
-    max-height: 380px;
+  .pg-tablist {
+    gap: var(--sp-4);
   }
+}
+
+/* A quiet way back: mono like the site's eyebrows, no underline, no shout. */
+.pg-back {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-decoration: none;
+  margin-bottom: var(--sp-4);
+}
+
+.pg-back:hover {
+  color: var(--ink);
 }
 
 .pg-switch {
@@ -1449,14 +1436,63 @@ thead th {
   background: #fff;
   color: var(--ink-2);
   text-decoration: none;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 .pg-switch a:hover {
   color: var(--ink);
+  border-color: var(--ink-3);
+  background: #f7f5f0;
 }
 
-.pg-switch .pg-switch__on {
+/* Written to outrank the hover rule above: the active pill stays ink with
+   white text whether or not the pointer is over it. */
+.pg-switch a.pg-switch__on,
+.pg-switch a.pg-switch__on:hover {
   background: var(--ink);
   border-color: var(--ink);
   color: #fff;
+}
+
+/* Two activities, two tabs: walk the measured mount, or edit a copy of it. */
+.pg-tabs {
+  margin-top: var(--sp-6);
+}
+
+.pg-tablist {
+  display: flex;
+  gap: var(--sp-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.pg-tab {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 650;
+  color: var(--ink-3);
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: var(--sp-2) 0 var(--sp-3);
+  cursor: pointer;
+}
+
+.pg-tab:hover {
+  color: var(--ink);
+}
+
+.pg-tab[aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.pg-tabpanel {
+  padding-top: var(--sp-4);
+}
+
+.pg-tabpanel:focus-visible {
+  outline-offset: -3px;
 }
