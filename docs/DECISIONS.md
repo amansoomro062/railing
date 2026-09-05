@@ -79,7 +79,7 @@ Format: `## NNN: Title` · date · **Decision** · **Reasoning** · **Consequenc
 
 **Decision.** A maintainer report may group several findings under one underlying cause, but the groupings are written by hand in `targets.json`, from the measured values, and are never derived automatically. The generator warns when a declared cause names a check that is no longer failing, refuses to render a group with fewer than two live findings, and throws if grouping would drop a finding from the report.
 
-**Reasoning.** Twelve findings listed flat read as twelve problems when they may be two decisions. But causation is a claim about someone else's code, and a guessed grouping is a second kind of false accusation inside a report that already asks to be trusted. The caution is not hypothetical: the obvious grouping for one library's three menu keyboard failures was that the menu never opened, and the measured values show it opens on click and focus simply never enters it. Grouped by intuition, the report would have told the maintainer something false about their own component.
+**Reasoning.** Twelve findings listed flat read as twelve problems when they may be two decisions. But causation is a claim about someone else's code, and a guessed grouping is a second kind of false accusation inside a report that already asks to be trusted. The caution is not hypothetical: the obvious grouping for Ant Design's three menu keyboard failures was that the menu never opened, and the measured values show it opens on click and focus simply never enters it. Grouped by intuition, the report would have told the maintainer something false about their own component.
 
 **Consequence.** Reports lead with "N findings, M share K underlying causes" only when it is true. A stale grouping surfaces as a warning rather than passing silently, because a cause that no longer matches the results means the report and the run disagree, and the run is the one that is right.
 
@@ -129,13 +129,13 @@ It also means the protocol's "exactly three focusable elements" is a description
 ## 016, A first run against a new library is an adapter draft, not a result
 *4 August 2026*
 
-**Decision.** One library is marked `draft` and none of its scores may be published until each remaining failure has been confirmed against the DOM by hand. No library's first run is publishable.
+**Decision.** Ant Design was marked `draft` and none of its scores may be published until each remaining failure has been confirmed against the DOM by hand. No library's first run is publishable.
 
-**Reasoning.** Its first run produced the worst scores in the index by a wide margin. Investigating each one moved two components enormously, and every point of movement was **our** fault:
+**Reasoning.** Ant Design's first run produced the worst scores in the index by a wide margin. Investigating each one moved two components enormously, and every point of movement was **our** fault:
 
 | Component | First run | After correcting the adapter | What was wrong |
 | --- | --- | --- | --- |
-| Combobox | 27% | 94% | We required the listbox to be CSS-visible. It puts `role=listbox` on a zero-height virtual-scroll node that a screen reader reaches perfectly well. |
+| Combobox | 27% | 94% | We required the listbox to be CSS-visible. Ant Design puts `role=listbox` on a zero-height virtual-scroll node that a screen reader reaches perfectly well. |
 | Accordion | 42% | 85% | We stamped `.ant-collapse-content`, which is the v5 class name. v6 renamed it to `.ant-collapse-panel`. |
 
 A 27% would have been the headline finding of the entire index. It was a selector.
@@ -147,7 +147,7 @@ Two spec corrections came out of it as well. "Is the popup open" is now answered
 **Still unresolved for Ant Design**, and the reason it stays unpublishable:
 
 - `combobox.options-have-option-role`, only one option is in the DOM at a time under virtualisation. Virtualised lists are legitimate when they carry `aria-setsize` and `aria-posinset`, which this spec does not yet check. This is most likely **our** limitation, not a defect.
-- `menu`, six failures, none yet confirmed by hand. Plausible, given that library's dropdown is built around pointer interaction, but plausible is not verified.
+- `menu`, six failures, none yet confirmed by hand. Plausible, given Ant Design's Dropdown is built around pointer interaction, but plausible is not verified.
 - `dialog.focus-trapped-*`, focus passes through `<body>` for one Tab before returning. Real, but materially less serious than reaching background content, and the severity should probably distinguish the two.
 
 **Confirmed by direct DOM inspection** and safe to carry forward: the dialog does not hide background content from assistive technology, the accordion header carries no `aria-controls`, and the accordion header is not a heading.
@@ -159,7 +159,7 @@ Two spec corrections came out of it as well. "Is the popup open" is now answered
 
 **Decision.** Setup helpers call `harness.settle()` after a component opens: two animation frames plus a 60ms floor. Sub-60ms interaction sequences are not tested, and any race that only appears within that window is not published as a finding.
 
-**Reasoning.** One library's combobox failed `escape-closes` intermittently, roughly half the time. It reproduced cleanly, and it was real: focus was correctly on the input, Escape was correctly delivered, and the popup stayed open.
+**Reasoning.** Chakra's combobox failed `escape-closes` intermittently, roughly half the time. It reproduced cleanly, and it was real: focus was correctly on the input, Escape was correctly delivered, and the popup stayed open.
 
 Measuring it settled the question:
 
@@ -177,7 +177,7 @@ Publishing it would have been indefensible in a specific and damaging way: techn
 
 It also generalises the lesson from 007 in the other direction. Decision 007 says *do not read state before the library has produced it*. This says *do not act on a component before it is ready to be acted on*. Both are the same underlying error, treating "visible" as "finished", and it has now cost us four false findings across both directions.
 
-One honest loose end: one library's tabs reported unstable once and did not reproduce across 24 subsequent runs. Not chased further, and recorded here rather than quietly forgotten, because a rare instability is exactly the kind of thing that becomes obvious in hindsight after it embarrasses you.
+One honest loose end: Chakra's tabs reported unstable once and did not reproduce across 24 subsequent runs. Not chased further, and recorded here rather than quietly forgotten, because a rare instability is exactly the kind of thing that becomes obvious in hindsight after it embarrasses you.
 
 ---
 
@@ -186,13 +186,13 @@ One honest loose end: one library's tabs reported unstable once and did not repr
 
 **Decision.** `railing run --repeat <n>` runs a spec n times and fails if any assertion's status varies. No result is published without it passing.
 
-**Reasoning.** One library's dialog scored 100% twice and 94% three times in a row. The failing assertion was `dialog.has-accessible-name`, and it was neither right nor wrong, it was a coin flip. Its title subcomponent registers its id into the dialog's `aria-labelledby` a tick after the dialog becomes visible, so reading the name immediately caught it roughly half the time.
+**Reasoning.** Headless UI's dialog scored 100% twice and 94% three times in a row. The failing assertion was `dialog.has-accessible-name`, and it was neither right nor wrong, it was a coin flip. Its title subcomponent registers its id into the dialog's `aria-labelledby` a tick after the dialog becomes visible, so reading the name immediately caught it roughly half the time.
 
 An intermittent result is worse than a consistently wrong one. A consistent failure is a claim a maintainer can check and refute. An intermittent one is indistinguishable from a real finding, and whichever run happened to be published is the one they have to argue against, while it passes on their machine.
 
 Running it once and eyeballing the number would never have caught this, because each individual run looked entirely reasonable.
 
-**Consequence.** Two more primitives, and both immediately found real instability: `waitForName` for accessible names assembled after mount, and `waitForAttrPresent` for ARIA relationships. That library sets `aria-controls` after `aria-expanded`, which was flipping `accordion.trigger-controls-panel` between pass and fail. The same latent bug existed in the tabs and combobox relationship assertions and was fixed in both before either produced a published result.
+**Consequence.** Two more primitives, and both immediately found real instability: `waitForName` for accessible names assembled after mount, and `waitForAttrPresent` for ARIA relationships. Headless UI sets `aria-controls` after `aria-expanded`, which was flipping `accordion.trigger-controls-panel` between pass and fail. The same latent bug existed in the tabs and combobox relationship assertions and was fixed in both before either produced a published result.
 
 All 20 target/spec pairs are now stable across repeated runs.
 
@@ -205,11 +205,11 @@ The deeper point: decision 007 has now recurred as timing (three times), as stat
 
 **Decision.** An adapter may use any component, prop or configuration the library exports. It may not hand-write ARIA attributes, ids or relationships, even when the library's own documentation instructs the developer to.
 
-**Reasoning.** Forced by one library whose documented examples have the developer write `aria-labelledby` onto its dialog, and `aria-haspopup` / `aria-controls` / `aria-expanded` onto a menu's trigger button. If we transcribe those, the score measures how faithfully we copied someone's documentation, and every library would eventually score 100% because a sufficiently diligent developer can bolt correct ARIA onto anything.
+**Reasoning.** Forced by MUI, whose documented examples have the developer write `aria-labelledby` onto its dialog, and `aria-haspopup` / `aria-controls` / `aria-expanded` onto a menu's trigger button. If we transcribe those, the score measures how faithfully we copied someone's documentation, and every library would eventually score 100% because a sufficiently diligent developer can bolt correct ARIA onto anything.
 
 The question the index answers is *what do you get from the library*. Radix and React Spectrum wire these relationships for you; others leave several to the developer. That difference is real, it is the kind of thing someone choosing a library would want to know, and it disappears entirely if the adapter fills the gap.
 
-**Consequence.** That library's scores drop on two components, with most of the failures being absent ARIA that it documents as the developer's job. That is a *defensible* result but an easily *misread* one, so:
+**Consequence.** MUI's scores drop on two components, with most of the failures being absent ARIA that it documents as the developer's job. That is a *defensible* result but an easily *misread* one, so:
 
 - every result carries adapter `notes` stating exactly this, and
 - it is the first finding to raise with the maintainer in Phase 4, because "we deliberately did not write the ARIA your docs tell people to write" is a position they are entitled to argue with.
@@ -223,7 +223,7 @@ A library that documents the fix is genuinely better than one that does not. If 
 
 **Decision.** Helpers that put a component into a state, `openMenu`, `openPopup`, `expandFirst`, try every route the APG permits. Only the assertion whose *subject* is a particular key pins that key.
 
-**Reasoning.** One library's menu scored **19%** on its first run. The actual defect was singular: its trigger does not open the menu on Down Arrow. But `openMenu` used Down Arrow, so nine further assertions failed with "the menu did not open", none of them measuring what they claimed. Role, focus management, arrow navigation, Escape and focus restoration are all correct in it, and all were reported as failures.
+**Reasoning.** MUI's menu scored **19%** on its first run. The actual defect was singular: its trigger does not open the menu on Down Arrow. But `openMenu` used Down Arrow, so nine further assertions failed with "the menu did not open", none of them measuring what they claimed. Role, focus management, arrow navigation, Escape and focus restoration are all correct in it, and all were reported as failures.
 
 With the fix, the same library scores **78%** and the four remaining failures are all real.
 

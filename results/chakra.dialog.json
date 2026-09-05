@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "target": {
+    "id": "chakra",
+    "versions": {
+      "@chakra-ui/react": "3.36.1",
+      "@emotion/react": "11.14.0"
+    },
+    "adapterVersion": "0.1.0",
+    "notes": "Chakra UI v3, mounted with default configuration using only components the library exports and no hand-written ARIA. Chakra v3 is built on Ark UI, so these results describe that underlying behaviour as Chakra ships it."
+  },
+  "component": "dialog",
+  "specVersion": "1.0.0",
+  "environment": {
+    "browser": "chromium",
+    "browserVersion": "151.0.7922.34",
+    "platform": "darwin",
+    "runnerVersion": "0.1.0"
+  },
+  "startedAt": "2026-08-04T17:54:18.486Z",
+  "finishedAt": "2026-08-04T17:54:23.963Z",
+  "assertions": [
+    {
+      "id": "dialog.trigger-has-accessible-name",
+      "title": "The control that opens the dialog has an accessible name",
+      "rationale": "A screen reader user hearing only \"button\" has no way to know what activating it will do.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 240,
+      "logs": [],
+      "detail": "Accessible name is \"Open dialog\""
+    },
+    {
+      "id": "dialog.trigger-is-focusable",
+      "title": "The trigger can be reached with the Tab key",
+      "rationale": "If Tab does not reach the trigger, a keyboard user cannot open the dialog at all.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 251,
+      "logs": []
+    },
+    {
+      "id": "dialog.opens-on-enter",
+      "title": "Pressing Enter on the focused trigger opens the dialog",
+      "rationale": "Mouse users can open it; if Enter does nothing, keyboard users are locked out of whatever the dialog contains.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 234,
+      "logs": []
+    },
+    {
+      "id": "dialog.has-dialog-role",
+      "title": "The dialog exposes role=dialog or role=alertdialog",
+      "rationale": "The role is what tells assistive technology this is a dialog, enabling its dialog-specific behaviour and announcements.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 352,
+      "logs": [],
+      "detail": "role=\"dialog\""
+    },
+    {
+      "id": "dialog.has-accessible-name",
+      "title": "The dialog has an accessible name",
+      "rationale": "On opening, a screen reader announces the dialog's name. Without one the user is told only that a dialog opened, with no indication of what it is for.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 316,
+      "logs": [],
+      "detail": "Accessible name is \"Railing test dialog\""
+    },
+    {
+      "id": "dialog.focus-moves-in",
+      "title": "Focus moves into the dialog when it opens",
+      "rationale": "If focus stays behind on the page, a keyboard or screen reader user has no idea the dialog appeared and must hunt for it.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 318,
+      "logs": [],
+      "detail": "Focus moved to [data-testid=\"hr-field-1\"]"
+    },
+    {
+      "id": "dialog.focus-trapped-forward",
+      "title": "Tab never reaches operable content behind the dialog",
+      "rationale": "Content behind a modal is inert to a mouse user. If Tab escapes into it, a keyboard user ends up interacting with things they cannot see.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 337,
+      "logs": [],
+      "detail": "Focus stayed within the dialog across six Tab presses."
+    },
+    {
+      "id": "dialog.focus-trapped-backward",
+      "title": "Shift+Tab never reaches operable content behind the dialog",
+      "rationale": "Backward traversal is routinely forgotten when forward traversal is handled, and it strands users just as badly.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 332,
+      "logs": [],
+      "detail": "Focus stayed within the dialog across six Shift+Tab presses."
+    },
+    {
+      "id": "dialog.tab-never-leaves-dialog",
+      "title": "Tab never leaves the dialog, even briefly",
+      "rationale": "A tab stop on nothing gives a keyboard user no feedback and no way to tell whether they have fallen out of the dialog. They have not, and can carry on, which is why this is not a blocker, but the APG asks Tab to cycle among the dialog's own elements.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 944,
+      "logs": [],
+      "detail": "Focus stayed within the dialog in both directions."
+    },
+    {
+      "id": "dialog.escape-closes",
+      "title": "Escape closes the dialog",
+      "rationale": "Escape is the universally learned way out of a modal. Without it, a user who cannot find the close button is stuck.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction",
+        "wcag": "2.1.2 No Keyboard Trap",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap.html"
+      },
+      "durationMs": 489,
+      "logs": []
+    },
+    {
+      "id": "dialog.focus-restored-on-close",
+      "title": "Closing the dialog returns focus to the trigger",
+      "rationale": "If focus is dropped to the top of the document on close, the user loses their place and has to tab back through the whole page.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 668,
+      "logs": []
+    },
+    {
+      "id": "dialog.background-inert",
+      "title": "Content behind the dialog is hidden from assistive technology",
+      "rationale": "A modal is visually exclusive. If the page behind it is still in the accessibility tree, a screen reader user can read and operate content that a sighted user cannot reach.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 311,
+      "logs": [],
+      "detail": "Background content is hidden from the accessibility tree."
+    },
+    {
+      "id": "dialog.close-has-accessible-name",
+      "title": "The close control has an accessible name",
+      "rationale": "Close buttons are frequently icon-only. Without a name, the way out of the dialog is announced as an unlabelled button.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 308,
+      "logs": [],
+      "detail": "Accessible name is \"Close\""
+    }
+  ],
+  "trace": "traces/chakra.dialog.zip"
+}

@@ -14,7 +14,12 @@
       "role": "control",
       "status": "published",
       "notes": "Calibration control. Widely regarded as the accessibility gold standard, and measured first so that a failure it produces is presumed to be a fault in our assertion. Scores 100% on all five components.",
-      "notifiedOn": "2026-08-09"
+      "notifiedOn": "2026-08-09",
+      "disclosure": {
+        "url": "https://github.com/adobe/react-spectrum/discussions/10442",
+        "replies": [],
+        "note": "Filed as issue #10440 through the feedback form; maintainer reidbarber converted it to a discussion the same day. React Spectrum is the calibration control and scored 100% on every component, so the notice was a courtesy."
+      }
     },
     {
       "id": "radix",
@@ -31,7 +36,11 @@
       "role": "subject",
       "status": "published",
       "notes": "Reference adapter implementation. Read this one first when writing a new adapter. Ships no combobox primitive, which is recorded as n/a rather than zero.",
-      "notifiedOn": "2026-08-05"
+      "notifiedOn": "2026-08-05",
+      "disclosure": {
+        "url": "https://github.com/radix-ui/primitives/issues/4091",
+        "replies": []
+      }
     },
     {
       "id": "shadcn",
@@ -49,7 +58,12 @@
       "unverified": {
         "combobox": "Base UI treats the combobox input as a search field: selecting an option commits to the component's value (confirmed: it becomes \"Banana\") but never writes it into the input. That may be a legitimate variant of the pattern rather than a defect, and this spec is written for the APG editable combobox where the input carries the value. Not published until the pattern match is settled."
       },
-      "notifiedOn": "2026-08-19"
+      "notifiedOn": "2026-08-19",
+      "disclosure": {
+        "url": "https://github.com/shadcn-ui/ui/issues/11554",
+        "replies": [],
+        "note": "The combobox result is held back until its pattern match is settled, see the unverified note above."
+      }
     },
     {
       "id": "mui",
@@ -64,7 +78,19 @@
       "role": "subject",
       "status": "published",
       "notes": "Measured. Findings withheld until the maintainer has been notified, per docs/DECISIONS.md 004.",
-      "notifiedOn": "2026-08-09"
+      "notifiedOn": "2026-08-09",
+      "disclosure": {
+        "url": "https://github.com/mui/material-ui/issues/48941",
+        "replies": [
+          {
+            "date": "2026-08-10",
+            "by": "ZeeshanTamboli (MUI member)",
+            "url": "https://github.com/mui/material-ui/issues/48941#issuecomment-5244419837",
+            "text": "Thanks for your input. We are improving the accessibility of our components."
+          }
+        ],
+        "note": "The issue was labelled accessibility and closed as completed the same day."
+      }
     },
     {
       "id": "chakra",
@@ -78,7 +104,12 @@
       "role": "subject",
       "status": "published",
       "notes": "Chakra v3, built on Ark UI. Findings withheld until the maintainer has been notified.",
-      "notifiedOn": "2026-08-09"
+      "notifiedOn": "2026-08-09",
+      "disclosure": {
+        "url": "https://github.com/chakra-ui/chakra-ui/discussions/10926",
+        "replies": [],
+        "note": "Filed as issue #10922; founder segunadebayo converted it to a discussion the next day."
+      }
     },
     {
       "id": "antd",
@@ -92,7 +123,31 @@
       "role": "subject",
       "status": "published",
       "notes": "Findings verified against the DOM, including with the library's own button component to rule out an adapter fault. Withheld from the site until the maintainer has been notified, per docs/DECISIONS.md 004.",
-      "notifiedOn": "2026-08-13"
+      "notifiedOn": "2026-08-13",
+      "disclosure": {
+        "url": "https://github.com/ant-design/ant-design/issues/58980",
+        "replies": [
+          {
+            "date": "2026-08-19",
+            "by": "MadCcc (Ant Design member)",
+            "url": "https://github.com/ant-design/ant-design/issues/58980#issuecomment-5339313560",
+            "text": "Can you provide a simple reproduce like codesandbox?"
+          },
+          {
+            "date": "2026-08-19",
+            "by": "MadCcc (Ant Design member)",
+            "url": "https://github.com/ant-design/ant-design/issues/58980#issuecomment-5339325104",
+            "text": "And also confirmed that dropdown with trigger=\"hover\" cannot open menu with keyboard."
+          },
+          {
+            "date": "2026-08-19",
+            "by": "zombieJ (Ant Design member)",
+            "url": "https://github.com/ant-design/ant-design/issues/58980#issuecomment-5339327450",
+            "text": "Maybe rc-trigger should support this?"
+          }
+        ],
+        "note": "A sandbox reproduction was supplied the same day. A community pull request, #58984, proposing a fix is open and unmerged."
+      }
     },
     {
       "id": "headlessui",
@@ -106,7 +161,11 @@
       "role": "subject",
       "status": "published",
       "notes": "Measured. Findings withheld until the maintainer has been notified.",
-      "notifiedOn": "2026-08-09"
+      "notifiedOn": "2026-08-09",
+      "disclosure": {
+        "url": "https://github.com/tailwindlabs/headlessui/issues/3886",
+        "replies": []
+      }
     }
   ]
 }

@@ -55,12 +55,40 @@ test("exactly the expected libraries are releasable right now", async () => {
   // genuinely ran out (add the library here, deliberately, as part of its
   // release) or something set a date that should not have been set.
   //
-  // Radix UI: notified 5 Aug 2026, fourteen-day window ended 19 Aug 2026.
-  // Next clocks: headlessui, chakra, mui, react-spectrum on 23 Aug; antd on
-  // 27 Aug; shadcn has not been notified.
-  const expected = ["Radix UI"];
+  // Every window has closed: Radix 19 Aug, Headless UI, Chakra, MUI and React
+  // Spectrum 23 Aug, Ant Design 27 Aug, shadcn/ui 2 Sept 2026. All seven were
+  // released together on 5 Sept 2026.
+  const expected = [
+    "React Spectrum",
+    "Radix UI",
+    "shadcn/ui",
+    "MUI",
+    "Chakra UI",
+    "Ant Design",
+    "Headless UI",
+  ];
   const { loadTargets } = await import("../lib/data.js");
   const targets = await loadTargets();
   const open = targets.filter((t) => releasable(t).ok).map((t) => t.name);
   assert.deepEqual(open.sort(), expected.sort(), `releasable now: ${open.join(", ")}`);
+});
+
+test("a component the registry marks unverified is held back whatever is on disk", async () => {
+  // shadcn/ui's combobox is measured and its file may well be present locally,
+  // but targets.json says its pattern match is unsettled. The loader, not the
+  // checkout, decides.
+  const { loadTargets, loadResults } = await import("../lib/data.js");
+  const targets = await loadTargets();
+  const results = await loadResults();
+  for (const t of targets) {
+    for (const component of Object.keys(t.unverified ?? {})) {
+      assert.equal(
+        results.get(t.id)?.has(component) ?? false,
+        false,
+        `${t.name} ${component} is marked unverified but loaded`,
+      );
+    }
+  }
+  const shadcn = targets.find((t) => t.id === "shadcn");
+  assert.ok(shadcn?.unverified?.combobox, "the fixture this test relies on has changed; re-check it");
 });

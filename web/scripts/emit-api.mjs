@@ -77,6 +77,9 @@ if (existsSync(resultsDir)) {
     if (run.target.id === "_fixture-broken") continue;
     if (run.harnessError) continue;
     if (run.assertions.some((a) => a.status === "error")) continue;
+    // Held back by hand in the registry, whatever is on disk. Same rule as the pages.
+    const owner = targets.find((t) => t.id === run.target.id);
+    if (owner?.unverified?.[run.component] !== undefined) continue;
     runs.push(run);
   }
 }

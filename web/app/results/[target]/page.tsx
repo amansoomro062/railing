@@ -112,6 +112,32 @@ export default async function TargetReportPage({
         </p>
       </div>
 
+      {target.disclosure ? (
+        <div className="note" id="maintainer-response">
+          <p className="note__t">Maintainer response</p>
+          <p>
+            Findings were delivered privately on {target.notifiedOn} in{" "}
+            <a href={target.disclosure.url}>this thread</a>, with the adapter source and fourteen
+            days to reply before publication.
+            {target.disclosure.note ? ` ${target.disclosure.note}` : ""}
+          </p>
+          {target.disclosure.replies.length === 0 ? (
+            <p>No reply inside the notice period.</p>
+          ) : (
+            target.disclosure.replies.map((r) => (
+              <blockquote key={r.url} cite={r.url}>
+                <p>{r.text}</p>
+                <footer>
+                  <a href={r.url}>
+                    {r.by}, {r.date}
+                  </a>
+                </footer>
+              </blockquote>
+            ))
+          )}
+        </div>
+      ) : null}
+
       <div className="pg-report">
         {components.map((c) => {
           const run = byComponent.get(c)!;
