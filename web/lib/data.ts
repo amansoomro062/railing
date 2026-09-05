@@ -42,6 +42,29 @@ export interface Target {
   notifiedOn?: string | null;
   /** Components measured but not confirmed by hand, keyed by component id. */
   unverified?: Record<string, string>;
+  /** Where the maintainer received their findings, and what they said on the record. */
+  disclosure?: Disclosure;
+}
+
+/**
+ * The public record of one library's notice period. Decision 004 promises that a
+ * maintainer's reply is published beside the score in full, so this is data, not
+ * prose: each reply is quoted verbatim with its author, date and permalink.
+ */
+export interface Disclosure {
+  /** The issue or discussion where the findings were delivered. */
+  url: string;
+  /** Verbatim maintainer replies inside the window, oldest first. Empty means silence. */
+  replies: DisclosureReply[];
+  /** Anything else on the record that is not a reply: a conversion, a closure, a fix PR. */
+  note?: string;
+}
+
+export interface DisclosureReply {
+  date: string;
+  by: string;
+  url: string;
+  text: string;
 }
 
 export interface Release {
@@ -88,6 +111,13 @@ export async function loadResults(): Promise<Map<string, Map<string, RunResult>>
   const byTarget = new Map<string, Map<string, RunResult>>();
   if (!existsSync(dir)) return byTarget;
 
+  // A component the registry marks unverified is held back whatever is on disk,
+  // so the gate does not depend on which result files happen to be checked out.
+  const held = new Map<string, Set<string>>();
+  for (const t of await loadTargets()) {
+    if (t.unverified) held.set(t.id, new Set(Object.keys(t.unverified)));
+  }
+
   const skipped: string[] = [];
   for (const file of (await readdir(dir)).filter((f) => f.endsWith(".json"))) {
     const result = JSON.parse(await readFile(join(dir, file), "utf8")) as RunResult;
@@ -99,6 +129,10 @@ export async function loadResults(): Promise<Map<string, Map<string, RunResult>>
     const verdict = isPublishable(result);
     if (!verdict.ok) {
       skipped.push(`${file}: ${verdict.reason}`);
+      continue;
+    }
+    if (held.get(result.target.id)?.has(result.component)) {
+      skipped.push(`${file}: marked unverified in targets.json`);
       continue;
     }
     if (!byTarget.has(result.target.id)) byTarget.set(result.target.id, new Map());
