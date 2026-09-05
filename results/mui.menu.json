@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "target": {
+    "id": "mui",
+    "versions": {
+      "@emotion/react": "11.14.0",
+      "@emotion/styled": "11.14.1",
+      "@mui/lab": "9.0.0-beta.6",
+      "@mui/material": "9.2.0"
+    },
+    "adapterVersion": "0.1.0",
+    "notes": "Mounted using only components MUI exports, with default configuration and no hand-written ARIA. MUI's documentation asks the developer to supply several ARIA attributes themselves, aria-labelledby on Dialog, and aria-haspopup / aria-controls / aria-expanded on a Menu's trigger button. Those are not supplied here, because writing them would measure our transcription of MUI's docs rather than what MUI ships. Tab panels come from @mui/lab, since @mui/material exports no tab panel component."
+  },
+  "component": "menu",
+  "specVersion": "1.0.0",
+  "environment": {
+    "browser": "chromium",
+    "browserVersion": "151.0.7922.34",
+    "platform": "darwin",
+    "runnerVersion": "0.1.0"
+  },
+  "startedAt": "2026-08-04T17:52:40.501Z",
+  "finishedAt": "2026-08-04T17:52:52.803Z",
+  "assertions": [
+    {
+      "id": "menu.trigger-has-accessible-name",
+      "title": "The menu button has an accessible name",
+      "rationale": "An unlabelled menu button is announced as just a button, giving no indication of what it opens.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 125,
+      "logs": [],
+      "detail": "Accessible name is \"OPEN MENU\""
+    },
+    {
+      "id": "menu.trigger-has-haspopup",
+      "title": "The menu button declares that it opens a menu",
+      "rationale": "aria-haspopup is what warns a screen reader user that activating this button opens something, rather than performing an action.",
+      "status": "fail",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 115,
+      "logs": [],
+      "detail": "The menu button does not declare that it opens a menu.",
+      "expected": "aria-haspopup=\"menu\"",
+      "actual": "attribute absent"
+    },
+    {
+      "id": "menu.trigger-collapsed-by-default",
+      "title": "aria-expanded is present and false before the menu opens",
+      "rationale": "Without it the user is not told the menu is currently shut, only that something can be opened.",
+      "status": "fail",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 113,
+      "logs": [],
+      "detail": "The collapsed menu button does not expose aria-expanded=\"false\".",
+      "expected": "aria-expanded=\"false\"",
+      "actual": "attribute absent"
+    },
+    {
+      "id": "menu.opens-on-enter",
+      "title": "Enter opens the menu",
+      "rationale": "The primary activation key. If it does nothing, the menu is unreachable by keyboard.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 225,
+      "logs": []
+    },
+    {
+      "id": "menu.opens-on-down-arrow",
+      "title": "Down Arrow opens the menu",
+      "rationale": "APG requires Down Arrow to open the menu and move to its first item, which is how most keyboard users reach it.",
+      "status": "fail",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 1126,
+      "logs": [],
+      "detail": "The menu did not open when Down Arrow was pressed on the focused button.",
+      "expected": "menu visible",
+      "actual": "menu absent or hidden after 2000ms"
+    },
+    {
+      "id": "menu.expanded-state-communicated",
+      "title": "aria-expanded becomes true when the menu opens",
+      "rationale": "A sighted user sees the menu appear. Without the state change a screen reader user is never told it did.",
+      "status": "fail",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 1218,
+      "logs": [],
+      "detail": "The menu button does not expose aria-expanded=\"true\" while its menu is open.",
+      "expected": "aria-expanded=\"true\"",
+      "actual": "attribute absent"
+    },
+    {
+      "id": "menu.has-menu-role",
+      "title": "The popup exposes role=menu",
+      "rationale": "The menu role is what makes the popup navigable as a menu rather than announced as a list of links.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 1225,
+      "logs": [],
+      "detail": "role=\"menu\""
+    },
+    {
+      "id": "menu.items-have-menuitem-role",
+      "title": "Each item exposes role=menuitem",
+      "rationale": "Without it a screen reader cannot count the items, announce position, or offer menu navigation shortcuts.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 1224,
+      "logs": [],
+      "detail": "All three items expose a menuitem role."
+    },
+    {
+      "id": "menu.focus-enters-menu-on-open",
+      "title": "Opening the menu moves to its first item",
+      "rationale": "This is the difference between a menu and a dropdown. If nothing becomes active on open, a keyboard user is left with a visible menu they cannot enter.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 1228,
+      "logs": [],
+      "detail": "First item active via DOM focus."
+    },
+    {
+      "id": "menu.arrow-moves-between-items",
+      "title": "Down Arrow moves to the next item",
+      "rationale": "Without arrow navigation a keyboard user can reach the first item and nothing beyond it.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 1238,
+      "logs": [],
+      "detail": "Moved from hr-item-1 to hr-item-2."
+    },
+    {
+      "id": "menu.escape-closes",
+      "title": "Escape closes the menu",
+      "rationale": "The learned way out. Without it a user who opened the menu by accident is stuck in it.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 1498,
+      "logs": []
+    },
+    {
+      "id": "menu.focus-restored-on-close",
+      "title": "Closing the menu returns focus to the button",
+      "rationale": "Focus was moved into the menu on open. If it is not handed back on close, the user is dropped to the top of the document and loses their place.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 1516,
+      "logs": []
+    },
+    {
+      "id": "menu.item-has-accessible-name",
+      "title": "Each item has an accessible name",
+      "rationale": "An unnamed menu item is announced as an empty menuitem and cannot be chosen deliberately.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/menubar/",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 1236,
+      "logs": [],
+      "detail": "All three items expose their label."
+    }
+  ],
+  "trace": "traces/mui.menu.zip"
+}

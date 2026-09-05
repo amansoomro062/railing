@@ -83,11 +83,12 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full design and [`doc
 
 ## Status
 
-**Pre-launch. Seven libraries are measured and every result is withheld.**
+**Live. Seven libraries measured, every result published at [railing.dev/results](https://railing.dev/results/).**
 
-Nothing is published until each maintainer has had their findings privately, with the
+Nothing went public until each maintainer had their findings privately, with the
 adapter used to produce them and fourteen days to reply. That is
-[the disclosure policy](https://railing.dev/disclosure), and it is enforced in code.
+[the disclosure policy](https://railing.dev/disclosure), it is enforced in code, and every
+reply received inside the window is quoted beside the score.
 
 | Milestone                                              | State       |
 | ------------------------------------------------------ | ----------- |
@@ -99,7 +100,7 @@ adapter used to produce them and fourteen days to reply. That is
 | Accordion spec (11 assertions)                          | Implemented         |
 | React Spectrum calibration control                      | 5 specs, all green  |
 | Radix reference adapter                                 | 4 green, combobox n/a |
-| Five subject adapters                                   | measured, results withheld |
+| Five subject adapters                                   | published; MUI, Chakra, Headless UI, shadcn/ui, Ant Design |
 | Broken fixture, false positives/negatives measured     | Calibrated on both  |
 | Public site, badges, CI                                 | Live at [railing.dev](https://railing.dev) |
 
