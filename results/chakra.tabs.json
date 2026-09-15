@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "target": {
+    "id": "chakra",
+    "versions": {
+      "@chakra-ui/react": "3.36.1",
+      "@emotion/react": "11.14.0"
+    },
+    "adapterVersion": "0.1.0",
+    "notes": "Chakra UI v3, mounted with default configuration using only components the library exports and no hand-written ARIA. Chakra v3 is built on Ark UI, so these results describe that underlying behaviour as Chakra ships it."
+  },
+  "component": "tabs",
+  "specVersion": "1.0.0",
+  "environment": {
+    "browser": "chromium",
+    "browserVersion": "151.0.7922.34",
+    "platform": "darwin",
+    "runnerVersion": "0.1.0"
+  },
+  "startedAt": "2026-08-04T17:55:05.337Z",
+  "finishedAt": "2026-08-04T17:55:08.671Z",
+  "assertions": [
+    {
+      "id": "tabs.tablist-has-role",
+      "title": "The tab container exposes role=tablist",
+      "rationale": "The tablist role is what tells assistive technology these are tabs rather than a row of buttons, and enables the navigation that goes with them.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 242,
+      "logs": [],
+      "detail": "role=\"tablist\""
+    },
+    {
+      "id": "tabs.tabs-have-tab-role",
+      "title": "Each tab exposes role=tab",
+      "rationale": "Without it a screen reader cannot announce position within the set or offer tab navigation.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 227,
+      "logs": [],
+      "detail": "All three tabs expose role=tab."
+    },
+    {
+      "id": "tabs.tab-has-accessible-name",
+      "title": "Each tab has an accessible name",
+      "rationale": "An unnamed tab is announced as an empty tab and cannot be chosen deliberately.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 226,
+      "logs": [],
+      "detail": "All three tabs expose their label."
+    },
+    {
+      "id": "tabs.panel-has-tabpanel-role",
+      "title": "The selected panel exposes role=tabpanel",
+      "rationale": "The tabpanel role is what associates the revealed content with the tab that revealed it, rather than leaving it as loose content on the page.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 219,
+      "logs": [],
+      "detail": "role=\"tabpanel\""
+    },
+    {
+      "id": "tabs.selected-tab-communicated",
+      "title": "Exactly one tab is marked selected",
+      "rationale": "aria-selected is the only way a screen reader user knows which tab they are on. Marking none, or several, makes the set unreadable.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 222,
+      "logs": [],
+      "detail": "One tab selected (hr-tab-1=true, hr-tab-2=false, hr-tab-3=false)."
+    },
+    {
+      "id": "tabs.panel-labelled-by-tab",
+      "title": "The panel takes its accessible name from its tab",
+      "rationale": "On entering the panel, a screen reader announces its name. Taking it from the tab is what tells the user which panel they are in.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "1.3.1 Info and Relationships",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+      },
+      "durationMs": 221,
+      "logs": [],
+      "detail": "Panel accessible name is \"Overview\""
+    },
+    {
+      "id": "tabs.tab-controls-panel",
+      "title": "The tab references its panel with aria-controls",
+      "rationale": "The relationship lets assistive technology move from a tab straight to the content it reveals, rather than hunting for it.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "1.3.1 Info and Relationships",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+      },
+      "durationMs": 221,
+      "logs": [],
+      "detail": "aria-controls references the panel (id=\"tabs::r0::content-one\")"
+    },
+    {
+      "id": "tabs.unselected-panels-not-exposed",
+      "title": "Unselected panels are hidden from assistive technology",
+      "rationale": "A sighted user sees one panel. If the others remain in the accessibility tree, a screen reader user reads content that is visually hidden and has no way to tell which panel they are in.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 223,
+      "logs": [],
+      "detail": "Only the selected panel is exposed."
+    },
+    {
+      "id": "tabs.tab-key-reaches-selected-tab",
+      "title": "Tab moves focus to the selected tab",
+      "rationale": "If Tab does not reach the tablist, a keyboard user cannot change tabs at all.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 229,
+      "logs": []
+    },
+    {
+      "id": "tabs.tablist-is-one-tab-stop",
+      "title": "The tablist is a single stop in the tab sequence",
+      "rationale": "Tabs are navigated with arrow keys, not the Tab key. Leaving every tab in the tab sequence forces a keyboard user to step through all of them to reach the page content, and is the usual result of building tabs out of a row of buttons.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 225,
+      "logs": [],
+      "detail": "Tab left the tablist to [data-testid=\"hr-panel-1\"]."
+    },
+    {
+      "id": "tabs.arrow-moves-between-tabs",
+      "title": "Right Arrow moves focus to the next tab",
+      "rationale": "Arrow keys are how the APG pattern navigates a tablist. Without them a keyboard user can reach the selected tab and no other.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 236,
+      "logs": []
+    },
+    {
+      "id": "tabs.activation-selects-tab",
+      "title": "Keyboard navigation can select a different tab",
+      "rationale": "Selecting a tab is the point of the component. Accepts either activation model the APG permits.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 236,
+      "logs": [],
+      "detail": "Second tab selected via automatic activation."
+    },
+    {
+      "id": "tabs.activation-reveals-panel",
+      "title": "Selecting a tab reveals its panel",
+      "rationale": "A tab that reports itself selected while the wrong content is showing is worse than one that does nothing, because the announcement and the content disagree.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 238,
+      "logs": []
+    }
+  ],
+  "trace": "traces/chakra.tabs.zip"
+}

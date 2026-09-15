@@ -69,11 +69,13 @@ export default async function Results() {
                   {COMPONENT_ORDER.map((c) => {
                     const run = byComponent?.get(c);
                     if (!run) {
+                      // Measured but held back by hand: the result is not trusted yet.
+                      const held = t.unverified?.[c] !== undefined;
                       return (
                         <td key={c}>
-                          <span className="chip chip--na">
+                          <span className="chip chip--na" title={held ? t.unverified?.[c] : undefined}>
                             <span className="chip__dot" />
-                            not run
+                            {held ? "unverified" : "not run"}
                           </span>
                         </td>
                       );

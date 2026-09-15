@@ -6,10 +6,8 @@ The plan is built around one constraint that shapes everything else:
 
 > **Credibility is the only asset this project has.** One unfair result, published early, destroys it permanently and cannot be recovered by being right afterwards. Every phase below is ordered to protect that.
 
-> **Library names are withheld from findings in this document** until every
-> maintainer has had the notice period that decision 004 gives them. The
-> methodological lessons are unchanged. The full text is restored by
-> `pnpm restore:docs`, which refuses to run until that period has passed.
+> Library names were restored to the findings below on 5 September 2026, once
+> every maintainer's notice period under decision 004 had closed.
 
 ---
 
@@ -100,29 +98,29 @@ Widen along both axes. Specs first, then adapters, because a spec bug found afte
   Started as 12 assertions. `panel-labelled-by-header` failed the control, and on checking the APG lists role=region and aria-labelledby for accordion panels under *Optional*, so it was our preference dressed as conformance, and it was removed. See decision 011.
 
 **Adapters:**
-- [x] shadcn/ui. Scores withheld until its maintainer has been notified.
+- [x] shadcn/ui, dialog, menu, tabs and accordion 100%; combobox 85%, held back as unverified until its pattern match is settled
 
   Generated with shadcn@4.16.1 on 4 August 2026, not installed, so the result is identified by CLI version and generation date rather than a package version.
 
   **The copy-paste model preserves the upstream behaviour.** Menu, tabs, accordion and dialog all match Radix exactly. That was the project's most interesting open question and the answer is reassuring.
 
   Two things worth knowing that only this exercise surfaced. shadcn is no longer a single upstream: dialog, menu, tabs and accordion are Radix, but the combobox is Base UI. And its generated dialog ships a close button of its own, which is what produced decision **017** after a reading that turned out to be ours, not the library's.
-- [x] MUI. Scores withheld until its maintainer has been notified.
+- [x] MUI, first subject library with a real spread: dialog, combobox and tabs 100%; accordion 97%; menu 78%
 
-  **The instrument discriminates.** Ten runs against Radix and React Spectrum had all landed at 100%, leaving open whether these specs were too coarse. This library answers it. Its failures are concentrated and coherent rather than scattered, which is what a working instrument looks like. The specifics are withheld until its maintainer has been notified.
+  **The instrument discriminates.** Ten runs against Radix and React Spectrum had all landed at 100%, leaving open whether these specs were too coarse. MUI answers it. The failures are concentrated and coherent, and all point at one thing: MUI ships the behaviour and leaves the ARIA wiring to the developer. Its menu trigger carries no aria-haspopup or aria-expanded, and its accordion summary no aria-controls, because the documentation has you write those yourself.
 
-  Two decisions came out of it. **012**, one library first scored 19%, because openMenu opened with Down Arrow, which that library does not support, so nine unrelated assertions failed with "the menu did not open". The same flaw existed in combobox and accordion and was fixed in both before it produced a result. **013**, adapters use only what the library exports and never hand-write ARIA, even where the library's own docs instruct it.
-- [x] Headless UI. Scores withheld until its maintainer has been notified.
+  Two decisions came out of it. **012**, MUI first scored 19%, because openMenu opened with Down Arrow, which MUI does not support, so nine unrelated assertions failed with "the menu did not open". The same flaw existed in combobox and accordion and was fixed in both before it produced a result. **013**, adapters use only what the library exports and never hand-write ARIA, even where the library's own docs instruct it.
+- [x] Headless UI, dialog, combobox, menu and tabs 100%; accordion 97%
 
-  Its one accordion finding is genuine and follows from the library's design. Confirmed against the DOM rather than taken on the assertion's word. Details withheld pending notification.
+  The accordion failure is genuine and follows from the library's design: Headless UI ships no accordion, only Disclosure, and a disclosure button has no heading wrapper. Confirmed against the DOM rather than taken on the assertion's word.
 
   It also produced decision **014**. Its dialog scored 100% twice and 94% three times in a row, an intermittent result caused by reading the accessible name before DialogTitle had registered itself. `--repeat` now makes instability measurable, and immediately found a second one in the accordion relationship assertion. All 20 pairs are stable.
-- [x] Chakra UI. Scores withheld until its maintainer has been notified.
+- [x] Chakra UI, dialog, combobox, menu and tabs 100%; accordion 97%
 
-  Chakra v3 is built on Ark UI and scores like it. Its one accordion finding is shared with other libraries, which makes it an ecosystem observation rather than a fact about any one of them. Details withheld pending notification.
+  Chakra v3 is built on Ark UI and scores like it. The accordion failure is the same one MUI and Headless UI have: section headers are not real headings. Three libraries sharing it makes it an ecosystem observation rather than a fact about any one of them.
 
-  It produced decision **015**, the most consequential one so far. One library's combobox failed `escape-closes` about half the time, and it was genuinely real, but only when Escape arrived within 50ms of the popup opening, which no human can do. The index now interacts at human speed and treats sub-60ms races as out of scope. Publishing that would have been technically accurate and completely irrelevant to any actual user.
-- [x] Ant Design. Scores withheld until its maintainer has been notified.
+  It produced decision **015**, the most consequential one so far. Chakra's combobox failed `escape-closes` about half the time, and it was genuinely real, but only when Escape arrived within 50ms of the popup opening, which no human can do. The index now interacts at human speed and treats sub-60ms races as out of scope. Publishing that would have been technically accurate and completely irrelevant to any actual user.
+- [x] Ant Design, tabs 100%; combobox 94%; dialog 92%; accordion 85%; menu 52%
 
   Its three open items are now closed against the DOM. Two were genuine, one of them confirmed a second time using the library's own button component to rule out an adapter fault. The third turned out to be our severity model rather than a defect, which produced decision **020**.
 

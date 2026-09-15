@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "target": {
+    "id": "antd",
+    "versions": {
+      "antd": "6.6.0"
+    },
+    "adapterVersion": "0.1.0",
+    "notes": "Ant Design, mounted with default configuration using only components the library exports and no hand-written ARIA. Ant Design has no single combobox component: AutoComplete is the closest match to the APG editable-combobox pattern and is what is measured here. Its accordion is Collapse, and its menu is Dropdown with a menu prop."
+  },
+  "component": "combobox",
+  "specVersion": "1.0.0",
+  "environment": {
+    "browser": "chromium",
+    "browserVersion": "151.0.7922.34",
+    "platform": "darwin",
+    "runnerVersion": "0.1.0"
+  },
+  "startedAt": "2026-08-13T09:03:05.641Z",
+  "finishedAt": "2026-08-13T09:03:20.435Z",
+  "assertions": [
+    {
+      "id": "combobox.has-accessible-name",
+      "title": "The combobox has an accessible name",
+      "rationale": "Without a name, a screen reader announces an unlabelled combobox and the user has no idea what they are choosing.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 210,
+      "logs": [],
+      "detail": "Accessible name is \"Choose a fruit\""
+    },
+    {
+      "id": "combobox.has-combobox-role",
+      "title": "The input exposes role=combobox",
+      "rationale": "The role is what tells assistive technology that this input has a popup, and enables the announcements and shortcuts that go with it.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 200,
+      "logs": [],
+      "detail": "role=\"combobox\""
+    },
+    {
+      "id": "combobox.is-focusable",
+      "title": "The combobox can be reached with the Tab key",
+      "rationale": "If Tab does not reach it, a keyboard user cannot use the control at all.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 229,
+      "logs": []
+    },
+    {
+      "id": "combobox.collapsed-by-default",
+      "title": "aria-expanded is present and false before the popup opens",
+      "rationale": "aria-expanded is how a screen reader announces that this control has a popup and that it is currently shut. Omitting it until opening leaves the user unaware there is anything to open.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 211,
+      "logs": []
+    },
+    {
+      "id": "combobox.opens-on-down-arrow",
+      "title": "Down Arrow opens the popup",
+      "rationale": "Down Arrow is the APG-specified way to open the list. If it does nothing, a keyboard user has no way to browse the options.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 1311,
+      "logs": []
+    },
+    {
+      "id": "combobox.expanded-state-communicated",
+      "title": "aria-expanded becomes true when the popup opens",
+      "rationale": "A sighted user sees the list appear. Without the state change, a screen reader user is never told it did.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 1320,
+      "logs": []
+    },
+    {
+      "id": "combobox.popup-has-listbox-role",
+      "title": "The popup exposes role=listbox",
+      "rationale": "The listbox role is what makes the popup navigable as a set of options rather than announced as unstructured content.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 1319,
+      "logs": [],
+      "detail": "role=\"listbox\""
+    },
+    {
+      "id": "combobox.controls-popup",
+      "title": "The combobox references its popup with aria-controls",
+      "rationale": "The relationship is what lets assistive technology connect the input to the list it drives, rather than treating them as unrelated regions.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "1.3.1 Info and Relationships",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+      },
+      "durationMs": 1318,
+      "logs": [],
+      "detail": "aria-controls references the listbox (id=\":r0:_list\")"
+    },
+    {
+      "id": "combobox.options-have-option-role",
+      "title": "Each option exposes role=option",
+      "rationale": "Without the option role, a screen reader cannot count the choices, announce position within them, or let the user jump between them.",
+      "status": "fail",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 1333,
+      "logs": [],
+      "detail": "Only 1 of 3 options is exposed at a time, and the list does not say how many there are.",
+      "expected": "either every option is exposed, or aria-setsize and aria-posinset describe the full set",
+      "actual": "1 option(s) present, aria-setsize=absent, aria-posinset=absent"
+    },
+    {
+      "id": "combobox.arrow-moves-active-option",
+      "title": "Down Arrow moves through the options",
+      "rationale": "Browsing the list is the entire purpose of the control. If the arrow keys do not move between options, a keyboard user cannot reach anything but the first.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 1313,
+      "logs": [],
+      "detail": "Active option moved (aria-activedescendant)."
+    },
+    {
+      "id": "combobox.active-option-communicated",
+      "title": "The active option is exposed to assistive technology",
+      "rationale": "A sighted user sees the highlight move. Unless it is communicated through aria-activedescendant or DOM focus, a screen reader user is never told which option they are on.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 1308,
+      "logs": [],
+      "detail": "Active option communicated via aria-activedescendant."
+    },
+    {
+      "id": "combobox.focus-remains-on-combobox",
+      "title": "DOM focus stays on the combobox while the popup is open",
+      "rationale": "The APG pattern keeps focus on the input so the user can keep typing to filter while browsing. Moving focus into the list breaks that and is a common source of confusing behaviour.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 1332,
+      "logs": []
+    },
+    {
+      "id": "combobox.enter-selects-active-option",
+      "title": "Enter selects the active option",
+      "rationale": "Selecting is the point of the control. If Enter does not commit the active option, a keyboard user can browse the list but never choose from it.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 1332,
+      "logs": [],
+      "detail": "Selected \"Apple\"."
+    },
+    {
+      "id": "combobox.escape-closes",
+      "title": "Escape closes the popup",
+      "rationale": "Escape is the learned way out. Without it a user who opened the list by accident has no obvious way to dismiss it.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 1733,
+      "logs": []
+    }
+  ],
+  "trace": "traces/antd.combobox.zip"
+}

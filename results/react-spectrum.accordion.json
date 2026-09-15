@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "target": {
+    "id": "react-spectrum",
+    "versions": {
+      "@adobe/react-spectrum": "3.47.3"
+    },
+    "adapterVersion": "0.1.0",
+    "notes": "Calibration control, not a subject. Mounted with default configuration per the React Spectrum documentation. A failure here is presumed to be a fault in our assertion until proven otherwise, see docs/DECISIONS.md 003."
+  },
+  "component": "accordion",
+  "specVersion": "1.0.0",
+  "environment": {
+    "browser": "chromium",
+    "browserVersion": "151.0.7922.34",
+    "platform": "darwin",
+    "runnerVersion": "0.1.0"
+  },
+  "startedAt": "2026-08-04T17:52:04.451Z",
+  "finishedAt": "2026-08-04T17:52:07.789Z",
+  "assertions": [
+    {
+      "id": "accordion.header-is-heading",
+      "title": "Each header control sits inside a heading",
+      "rationale": "Screen reader users navigate documents by heading. If accordion headers are not headings, an entire page structure disappears from the shortcut that most users rely on to move around it.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#wai-ariaroles,states,andproperties",
+        "wcag": "1.3.1 Info and Relationships",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+      },
+      "durationMs": 262,
+      "logs": [],
+      "detail": "All three headers sit inside heading elements."
+    },
+    {
+      "id": "accordion.trigger-is-button",
+      "title": "Each header control exposes role=button",
+      "rationale": "The control that expands a section must be announced as a button, or the user is not told it can be operated at all.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 298,
+      "logs": [],
+      "detail": "All three header controls expose role=button."
+    },
+    {
+      "id": "accordion.trigger-has-accessible-name",
+      "title": "Each header control has an accessible name",
+      "rationale": "An unnamed control cannot be chosen deliberately from a list of them.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 290,
+      "logs": [],
+      "detail": "All three headers expose their label."
+    },
+    {
+      "id": "accordion.collapsed-state-communicated",
+      "title": "Collapsed sections expose aria-expanded=false",
+      "rationale": "Without it the user is not told the control expands anything, so a collapsed accordion reads as a list of inert buttons.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 248,
+      "logs": [],
+      "detail": "All three sections report themselves collapsed."
+    },
+    {
+      "id": "accordion.trigger-controls-panel",
+      "title": "The header control references its panel with aria-controls",
+      "rationale": "The relationship is what lets assistive technology move from the control to the content it reveals.",
+      "status": "pass",
+      "severity": "moderate",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#wai-ariaroles,states,andproperties",
+        "wcag": "1.3.1 Info and Relationships",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+      },
+      "durationMs": 286,
+      "logs": [],
+      "detail": "aria-controls references an element with id=\"react-aria2154933491-:r2:\""
+    },
+    {
+      "id": "accordion.collapsed-panel-not-exposed",
+      "title": "Collapsed panels are hidden from assistive technology",
+      "rationale": "A sighted user sees nothing. If the content is still in the accessibility tree, a screen reader user reads sections that appear closed, with no way to tell where one ends and the next begins.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 301,
+      "logs": [],
+      "detail": "No collapsed panel is exposed."
+    },
+    {
+      "id": "accordion.enter-expands",
+      "title": "Enter expands the focused section",
+      "rationale": "The primary activation key. Without it the content is unreachable by keyboard.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 262,
+      "logs": []
+    },
+    {
+      "id": "accordion.space-expands",
+      "title": "Space expands the focused section",
+      "rationale": "The APG requires both Enter and Space on the header. Space is routinely missed by implementations that attach a click handler to a non-button element.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 259,
+      "logs": []
+    },
+    {
+      "id": "accordion.expanded-panel-exposed",
+      "title": "An expanded panel is exposed and reveals its content",
+      "rationale": "A header reporting itself expanded while its content stays hidden from assistive technology is worse than one that does nothing, because the announcement and the reality disagree.",
+      "status": "pass",
+      "severity": "blocker",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#wai-ariaroles,states,andproperties",
+        "wcag": "4.1.2 Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+      },
+      "durationMs": 274,
+      "logs": []
+    },
+    {
+      "id": "accordion.headers-are-tab-stops",
+      "title": "Tab moves between accordion headers",
+      "rationale": "Accordion headers are each a stop in the tab sequence, the opposite of a tablist, which is a single stop navigated with arrows. Implementations that copy tab behaviour here strand the user on the first header.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#keyboardinteraction",
+        "wcag": "2.4.3 Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      },
+      "durationMs": 258,
+      "logs": []
+    },
+    {
+      "id": "accordion.collapses-again",
+      "title": "Activating an expanded header collapses it",
+      "rationale": "A section that opens and cannot be closed leaves the user unable to get back to a scannable list, which is the whole reason for using an accordion.",
+      "status": "pass",
+      "severity": "serious",
+      "refs": {
+        "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#keyboardinteraction",
+        "wcag": "2.1.1 Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"
+      },
+      "durationMs": 266,
+      "logs": []
+    }
+  ],
+  "trace": "traces/react-spectrum.accordion.zip"
+}
